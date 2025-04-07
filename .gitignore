@@ -1,0 +1,33 @@
+# Ignore React build output
+/build/
+
+# Ignore React source directory
+
+
+# Node dependencies (if using Node for React build)
+/react-src/node_modules/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor and system files
+.DS_Store
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+Thumbs.db
+ehthumbs.db
+
+# Others
+.eslintcache
+.prettiercache
+.cache
