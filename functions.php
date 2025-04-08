@@ -17,6 +17,11 @@ function synctriotech_enqueue_scripts()
         'synctriotech-style',
         get_stylesheet_uri()
     );
+
+    wp_enqueue_style(
+        'synctriotech-theme-style',
+        $theme_dir . '/assets/css/styles.css' // Correctly reference the path to styles.css
+    );
 }
 
 add_action('wp_enqueue_scripts', 'synctriotech_enqueue_scripts');

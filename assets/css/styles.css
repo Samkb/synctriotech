@@ -1,0 +1,243 @@
+/* styles.css */
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(90deg, #1e40af, #14b8a6);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-section p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
+.hero-section .cta-button {
+    background-color: white;
+    color: #1e40af;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.hero-section .cta-button:hover {
+    background-color: #1e40af;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* About Section */
+.about-section {
+    margin-top: 5rem;
+    text-align: center;
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.about-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.about-section p {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 1.25rem;
+}
+
+.about-section .tagline {
+    font-size: 1.25rem;
+    color: #14b8a6;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.about-section img {
+    border-radius: 0.75rem;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Services Section */
+.services-section {
+    background-color: #f9fafb;
+    padding: 4rem 2rem;
+    border-radius: 1rem;
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.services-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.services-section p {
+    font-size: 1.125rem;
+    color: #6b7280;
+    margin-bottom: 2rem;
+}
+
+.services-section .service-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.services-section .service-card:hover {
+    box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.services-section .cta-button {
+    background-color: #1e40af;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.services-section .cta-button:hover {
+    background-color: #2563eb;
+}
+
+/* Why Choose Us Section */
+.why-choose-us-section {
+    margin-top: 4rem;
+    padding: 4rem 2rem;
+}
+
+.why-choose-us-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.why-choose-us-section .feature-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.why-choose-us-section .feature-card:hover {
+    box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.why-choose-us-section .feature-card span {
+    color: #14b8a6;
+}
+
+/* Portfolio Section */
+.portfolio-section {
+    background-color: #f9fafb;
+    padding: 4rem 2rem;
+    border-radius: 1rem;
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.portfolio-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.portfolio-section .project-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.portfolio-section .project-card:hover {
+    box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio-section .cta-button {
+    background-color: #1e40af;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.portfolio-section .cta-button:hover {
+    background-color: #2563eb;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    margin-top: 4rem;
+    text-align: center;
+    background-color: #e0f7fa;
+    padding: 4rem 2rem;
+    border-radius: 1rem;
+}
+
+.testimonials-section p {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 1.25rem;
+}
+
+/* Contact Us Section */
+.contact-us-section {
+    margin-top: 4rem;
+    text-align: center;
+    background-color: #f9fafb;
+    padding: 4rem 2rem;
+    border-radius: 1rem;
+}
+
+.contact-us-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.contact-us-section p {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 1.25rem;
+}
+
+.contact-us-section .cta-button {
+    background-color: #1e40af;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.contact-us-section .cta-button:hover {
+    background-color: #2563eb;
+}
