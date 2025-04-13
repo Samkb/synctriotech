@@ -8,10 +8,8 @@ const Header: React.FC = () => {
         display: "flex",
         alignItems: "center",
         padding: "20px 40px",
-        background:
-          "linear-gradient(135deg,rgb(44, 37, 116),rgb(54, 111, 125))", // Gradient background for branding
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
-        position: "relative",
+        position: "fixed",
         zIndex: 10,
       }}
     >
