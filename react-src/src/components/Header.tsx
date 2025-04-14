@@ -1,16 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle scroll event
+  useEffect(() => {
+    const handleScroll = () => {
+      console.log(window.scrollY); // Log scroll position to verify it’s working
+      if (window.scrollY > 50) {
+        setIsScrolled(true); // Set scrolled state when user scrolls
+      } else {
+        setIsScrolled(false); // Reset when user is at the top
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <header
       style={{
         display: "flex",
         alignItems: "center",
         padding: "20px 40px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
         position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
         zIndex: 10,
+        width: "100%",
+        backgroundColor: isScrolled ? "#000" : "transparent", // Change background color after scroll
+        boxShadow: isScrolled
+          ? "0 4px 12px rgba(0, 0, 0, 0.3)" // Apply box shadow after scroll
+          : "none",
+        transition: "background-color 0.3s ease, box-shadow 0.3s ease", // Smooth transition for background and shadow
       }}
     >
       {/* Logo Section */}
@@ -19,8 +48,8 @@ const Header: React.FC = () => {
           src="wp-content/themes/synctriotech/react-src/public/assets/synctrio-tech-left.svg"
           alt="Logo"
           style={{
-            height: "50px", // Slightly larger logo for more visibility
-            filter: "brightness(0) invert(1)", // White logo if your background is dark
+            height: "50px",
+            filter: "brightness(0) invert(1)", // White logo for dark background
           }}
         />
       </Link>
@@ -31,25 +60,36 @@ const Header: React.FC = () => {
           style={{
             display: "flex",
             listStyle: "none",
-            gap: "30px", // Bigger spacing for a cleaner look
+            gap: "30px",
             margin: 0,
-            fontSize: "1.1rem", // Slightly bigger font for better readability
-            fontWeight: 600, // Bold font for more emphasis
+            fontSize: "1.1rem",
+            fontWeight: 600,
+            padding: "0",
           }}
         >
           <li>
             <Link
               to="/"
               style={{
-                color: "#fff", // White text
-                textDecoration: "none", // Remove underline
-                transition: "all 0.3s ease", // Smooth transition
+                color: isScrolled ? "#fff" : "#fff", // White text when scrolled
+                textDecoration: "none",
+                padding: "10px 15px",
+                borderRadius: "5px",
+                transition: "all 0.3s ease, text-shadow 0.3s ease",
+                display: "block",
+                textTransform: "uppercase",
               }}
               onMouseEnter={(e) => {
-                e.target.style.color = "#00ffcc"; // Highlight on hover
+                e.target.style.color = "transparent"; // Text becomes transparent
+                e.target.style.backgroundImage =
+                  "linear-gradient(to left, #000, #00ffcc, #28a745)"; // Gradient text color
+                e.target.style.backgroundClip = "text"; // Apply gradient to text
+                e.target.style.textFillColor = "transparent"; // Make text transparent to see gradient
               }}
               onMouseLeave={(e) => {
-                e.target.style.color = "#fff"; // Revert to original on mouse leave
+                e.target.style.color = isScrolled ? "#fff" : "#fff"; // Revert to original color
+                e.target.style.backgroundImage = "none"; // Remove gradient on hover leave
+                e.target.style.textFillColor = "initial"; // Revert text color to default
               }}
             >
               Home
@@ -59,15 +99,25 @@ const Header: React.FC = () => {
             <Link
               to="/about"
               style={{
-                color: "#fff",
+                color: isScrolled ? "#fff" : "#fff",
                 textDecoration: "none",
-                transition: "all 0.3s ease",
+                padding: "10px 15px",
+                borderRadius: "5px",
+                transition: "all 0.3s ease, text-shadow 0.3s ease",
+                display: "block",
+                textTransform: "uppercase",
               }}
               onMouseEnter={(e) => {
-                e.target.style.color = "#00ffcc";
+                e.target.style.color = "transparent";
+                e.target.style.backgroundImage =
+                  "linear-gradient(to left, #000, #00ffcc, #28a745)";
+                e.target.style.backgroundClip = "text";
+                e.target.style.textFillColor = "transparent";
               }}
               onMouseLeave={(e) => {
-                e.target.style.color = "#fff";
+                e.target.style.color = isScrolled ? "#fff" : "#fff";
+                e.target.style.backgroundImage = "none";
+                e.target.style.textFillColor = "initial";
               }}
             >
               About
@@ -77,15 +127,25 @@ const Header: React.FC = () => {
             <Link
               to="/contact"
               style={{
-                color: "#fff",
+                color: isScrolled ? "#fff" : "#fff",
                 textDecoration: "none",
-                transition: "all 0.3s ease",
+                padding: "10px 15px",
+                borderRadius: "5px",
+                transition: "all 0.3s ease, text-shadow 0.3s ease",
+                display: "block",
+                textTransform: "uppercase",
               }}
               onMouseEnter={(e) => {
-                e.target.style.color = "#00ffcc";
+                e.target.style.color = "transparent";
+                e.target.style.backgroundImage =
+                  "linear-gradient(to left, #000, #00ffcc, #28a745)";
+                e.target.style.backgroundClip = "text";
+                e.target.style.textFillColor = "transparent";
               }}
               onMouseLeave={(e) => {
-                e.target.style.color = "#fff";
+                e.target.style.color = isScrolled ? "#fff" : "#fff";
+                e.target.style.backgroundImage = "none";
+                e.target.style.textFillColor = "initial";
               }}
             >
               Contact
