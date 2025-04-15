@@ -7,11 +7,10 @@ const Header: React.FC = () => {
   // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.scrollY); // Log scroll position to verify it’s working
       if (window.scrollY > 50) {
-        setIsScrolled(true); // Set scrolled state when user scrolls
+        setIsScrolled(true); // Show solid header after scroll
       } else {
-        setIsScrolled(false); // Reset when user is at the top
+        setIsScrolled(false); // Keep transparent on top
       }
     };
 
@@ -35,9 +34,9 @@ const Header: React.FC = () => {
         right: 0,
         zIndex: 10,
         width: "100%",
-        backgroundColor: isScrolled ? "#000" : "transparent", // Change background color after scroll
+        backgroundColor: isScrolled ? "#000" : "transparent", // Black background after scroll
         boxShadow: isScrolled
-          ? "0 4px 12px rgba(0, 0, 0, 0.3)" // Apply box shadow after scroll
+          ? "0 4px 12px rgba(0, 0, 0, 0.3)" // More prominent shadow after scrolling
           : "none",
         transition: "background-color 0.3s ease, box-shadow 0.3s ease", // Smooth transition for background and shadow
       }}
