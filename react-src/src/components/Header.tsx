@@ -1,158 +1,174 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import EmailIcon from "@mui/icons-material/Email";
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true); // Show solid header after scroll
-      } else {
-        setIsScrolled(false); // Keep transparent on top
-      }
+      setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
-
-    // Cleanup the event listener when component unmounts
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header
-      style={{
-        display: "flex",
-        alignItems: "center",
-        padding: "20px 40px",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 10,
-        width: "100%",
-        backgroundColor: isScrolled ? "#000" : "transparent", // Black background after scroll
-        boxShadow: isScrolled
-          ? "0 4px 12px rgba(0, 0, 0, 0.3)" // More prominent shadow after scrolling
-          : "none",
-        transition: "background-color 0.3s ease, box-shadow 0.3s ease", // Smooth transition for background and shadow
-      }}
-    >
-      {/* Logo Section */}
-      <Link to="/" style={{ marginRight: "30px" }}>
-        <img
-          src="wp-content/themes/synctriotech/react-src/public/assets/synctrio-tech-left.svg"
-          alt="Logo"
-          style={{
-            height: "50px",
-            filter: "brightness(0) invert(1)", // White logo for dark background
-          }}
-        />
-      </Link>
+    <>
+      <header
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "20px 40px",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 20,
+          width: "100%",
+          backgroundColor: isScrolled ? "#000" : "transparent",
+          boxShadow: isScrolled ? "0 4px 12px rgba(0, 0, 0, 0.3)" : "none",
+          transition: "background-color 0.3s ease, box-shadow 0.3s ease",
+        }}
+      >
+        <Link to="/">
+          <img
+            src="wp-content/themes/synctriotech/react-src/public/assets/synctrio-tech-left.svg"
+            alt="SyncTrio Tech"
+            style={{
+              height: "50px",
+              filter: "brightness(0) invert(1)",
+            }}
+          />
+        </Link>
 
-      {/* Navigation Menu */}
-      <nav>
-        <ul
+        <button
+          onClick={() => setMenuOpen(true)}
           style={{
-            display: "flex",
-            listStyle: "none",
-            gap: "30px",
-            margin: 0,
-            fontSize: "1.1rem",
-            fontWeight: 600,
-            padding: "0",
+            background: "none",
+            border: "none",
+            color: "#fff",
+            cursor: "pointer",
+            zIndex: 30,
           }}
         >
-          <li>
+          <MenuIcon style={{ fontSize: 32 }} />
+        </button>
+      </header>
+
+      {/* Slide Menu */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          right: menuOpen ? 0 : "-100%",
+          height: "100%",
+          width: "280px",
+          backgroundColor: "#000",
+          color: "#fff",
+          padding: "30px 20px",
+          transition: "right 0.3s ease-in-out",
+          zIndex: 25,
+          boxShadow: "0 0 30px rgba(0, 255, 255, 0.2)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            marginBottom: "40px",
+          }}
+        >
+          <button
+            onClick={() => setMenuOpen(false)}
+            style={{
+              background: "none",
+              border: "none",
+              color: "#fff",
+              cursor: "pointer",
+            }}
+          >
+            <CloseIcon style={{ fontSize: 28 }} />
+          </button>
+        </div>
+
+        <nav>
+          {["Home", "About", "Contact"].map((item, index) => (
             <Link
-              to="/"
+              key={index}
+              to={`/${item.toLowerCase()}`}
+              onClick={() => setMenuOpen(false)}
               style={{
-                color: isScrolled ? "#fff" : "#fff", // White text when scrolled
-                textDecoration: "none",
-                padding: "10px 15px",
-                borderRadius: "5px",
-                transition: "all 0.3s ease, text-shadow 0.3s ease",
                 display: "block",
+                marginBottom: "20px",
+                color: "#fff",
+                textDecoration: "none",
+                fontWeight: "600",
+                fontSize: "1.1rem",
                 textTransform: "uppercase",
               }}
-              onMouseEnter={(e) => {
-                e.target.style.color = "transparent"; // Text becomes transparent
-                e.target.style.backgroundImage =
-                  "linear-gradient(to left, #000, #00ffcc, #28a745)"; // Gradient text color
-                e.target.style.backgroundClip = "text"; // Apply gradient to text
-                e.target.style.textFillColor = "transparent"; // Make text transparent to see gradient
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.color = isScrolled ? "#fff" : "#fff"; // Revert to original color
-                e.target.style.backgroundImage = "none"; // Remove gradient on hover leave
-                e.target.style.textFillColor = "initial"; // Revert text color to default
-              }}
             >
-              Home
+              {item}
             </Link>
-          </li>
-          <li>
-            <Link
-              to="/about"
-              style={{
-                color: isScrolled ? "#fff" : "#fff",
-                textDecoration: "none",
-                padding: "10px 15px",
-                borderRadius: "5px",
-                transition: "all 0.3s ease, text-shadow 0.3s ease",
-                display: "block",
-                textTransform: "uppercase",
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.color = "transparent";
-                e.target.style.backgroundImage =
-                  "linear-gradient(to left, #000, #00ffcc, #28a745)";
-                e.target.style.backgroundClip = "text";
-                e.target.style.textFillColor = "transparent";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.color = isScrolled ? "#fff" : "#fff";
-                e.target.style.backgroundImage = "none";
-                e.target.style.textFillColor = "initial";
-              }}
+          ))}
+        </nav>
+
+        {/* Footer Section in Menu */}
+        <div style={{ marginTop: "40px" }}>
+          {/* CTA */}
+          <Link
+            to="/contact"
+            onClick={toggleMenu}
+            style={{
+              display: "block",
+              background: "#00ffff",
+              color: "#000",
+              textAlign: "center",
+              padding: "10px 20px",
+              borderRadius: "8px",
+              fontWeight: "bold",
+              textDecoration: "none",
+              marginBottom: "30px",
+              transition: "all 0.3s ease-in-out",
+            }}
+          >
+            Let's Talk
+          </Link>
+
+          {/* Socials */}
+          <div
+            style={{ display: "flex", justifyContent: "center", gap: "20px" }}
+          >
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#fff" }}
             >
-              About
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/contact"
-              style={{
-                color: isScrolled ? "#fff" : "#fff",
-                textDecoration: "none",
-                padding: "10px 15px",
-                borderRadius: "5px",
-                transition: "all 0.3s ease, text-shadow 0.3s ease",
-                display: "block",
-                textTransform: "uppercase",
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.color = "transparent";
-                e.target.style.backgroundImage =
-                  "linear-gradient(to left, #000, #00ffcc, #28a745)";
-                e.target.style.backgroundClip = "text";
-                e.target.style.textFillColor = "transparent";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.color = isScrolled ? "#fff" : "#fff";
-                e.target.style.backgroundImage = "none";
-                e.target.style.textFillColor = "initial";
-              }}
+              <GitHubIcon />
+            </a>
+            <a
+              href="https://linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#fff" }}
             >
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
+              <LinkedInIcon />
+            </a>
+            <a href="mailto:hello@synctriotech.com" style={{ color: "#fff" }}>
+              <EmailIcon />
+            </a>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

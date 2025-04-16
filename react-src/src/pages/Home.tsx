@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   BusinessCenter,
@@ -28,8 +29,32 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import HandshakeIcon from "@mui/icons-material/Handshake";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import MessageIcon from "@mui/icons-material/MarkEmailUnread";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
 const Home: React.FC = () => {
+  const timelineRef = useRef(null);
+
+  useEffect(() => {
+    const line = timelineRef.current;
+
+    const animateLine = () => {
+      const rect = line.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const totalHeight = line.scrollHeight;
+      const visible = Math.min(windowHeight - rect.top, totalHeight);
+      const progress = Math.max(0, Math.min(1, visible / totalHeight));
+      line.style.transform = `scaleY(${progress})`;
+    };
+
+    animateLine();
+    window.addEventListener("scroll", animateLine);
+    return () => window.removeEventListener("scroll", animateLine);
+  }, []);
+
   return (
     <>
       {/* Header Section */}
@@ -144,7 +169,6 @@ const Home: React.FC = () => {
           </motion.div>
         </a>
       </section>
-
       {/* Core Pillars Section */}
       <section
         id="core-pillars"
@@ -226,6 +250,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+      {/* About Section */}
       <section
         id="about"
         style={{
@@ -648,7 +673,6 @@ const Home: React.FC = () => {
         </div>
       </section>
       {/* Our Works Section */}
-      {/* Our Works Section */}
       <section
         className="portfolio-section py-5"
         style={{
@@ -737,6 +761,11 @@ const Home: React.FC = () => {
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
     }
 
+    .project-card:hover .overlay {
+  background: transparent;
+  opacity: 0;
+  transition: opacity 0.4s ease, background 0.4s ease;
+}
     .image-scroll-container {
       height: 300px;
       overflow: hidden;
@@ -749,26 +778,340 @@ const Home: React.FC = () => {
     }
 
     .project-card:hover .scroll-img {
-      transform: translateY(-40%);
+      transform: translateY(-80%);
     }
 
-    .overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 1rem;
-      background: rgba(0, 0, 0, 0.6);
-      transition: background 0.4s ease;
-    }
-
+ 
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  transition: background 0.4s ease, opacity 0.4s ease;
+}
     .overlay h5,
     .overlay p {
       margin: 0;
       opacity: 1;
-      transform: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
+
+  .project-card:hover .overlay h5,
+  .project-card:hover .overlay p {
+    opacity: 0;
+    transform: translateY(10px);
+  }
   `}</style>
+      </section>
+      {/* Testimonial Section */}
+      <section
+        className="testimonials-section py-5"
+        style={{
+          background: "linear-gradient(to right, #1c1c1c, #2b2b2b)",
+          color: "#fff",
+          position: "relative",
+        }}
+      >
+        <div className="container position-relative">
+          <motion.h2
+            className="fw-bold text-center mb-4 display-5 d-flex align-items-center justify-content-center gap-3"
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <i className="bi bi-chat-quote-fill text-cyan"></i>
+            What Our Clients Say
+          </motion.h2>
+          <p className="text-center text-muted mb-5">
+            Voices from visionaries — built, launched, and loved 🚀
+          </p>
+
+          <div className="timeline-wrapper">
+            <div className="timeline-line" ref={timelineRef}></div>
+
+            {[
+              {
+                quote:
+                  "SyncTrio Tech transformed our business with seamless integration and a user-friendly platform!",
+                name: "Aarav Sharma",
+                logo: "/assets/clients/client1-logo.png",
+                rating: 5,
+                date: "2024-12-15 10:30 AM",
+              },
+              {
+                quote:
+                  "Their team delivered beyond expectations. We're seeing real results!",
+                name: "Priya Desai",
+                logo: "/assets/clients/client2-logo.png",
+                rating: 4,
+                date: "2025-01-10 03:45 PM",
+              },
+              {
+                quote:
+                  "We loved the collaboration and support throughout our SaaS build. Definitely recommended.",
+                name: "Rajan Thapa",
+                logo: "/assets/clients/client3-logo.png",
+                rating: 5,
+                date: "2025-02-25 12:15 PM",
+              },
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                className={`timeline-item ${
+                  index % 2 === 0 ? "left" : "right"
+                }`}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.3 }}
+              >
+                <div className="node-dot"></div>
+
+                <div className="testimonial-card p-4 text-center">
+                  <img
+                    src={
+                      testimonial.logo ||
+                      `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                        testimonial.name
+                      )}&background=00ffff&color=ffffff&rounded=true&size=80`
+                    }
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                        testimonial.name
+                      )}&background=00ffff&color=ffffff&rounded=true&size=80`;
+                    }}
+                    alt={testimonial.name}
+                    className="rounded-circle mb-3"
+                    width="70"
+                    height="70"
+                  />
+
+                  <p className="fs-6 fst-italic text-light mb-3 position-relative">
+                    <i className="bi bi-quote fs-4 text-cyan me-1"></i>
+                    {testimonial.quote}
+                  </p>
+                  <div className="mb-2">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <i key={i} className="bi bi-star-fill text-warning"></i>
+                    ))}
+                  </div>
+                  <h6 className="fw-bold text-white mb-0">
+                    <i className="bi bi-person-circle me-2 text-info"></i>
+                    {testimonial.name}
+                  </h6>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <style>{`
+          .text-cyan {
+            color: #00ffff;
+          }
+
+          .timeline-wrapper {
+            position: relative;
+            padding: 2rem 0;
+          }
+
+          .timeline-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: #00ffff;
+            transform-origin: top;
+            transform: scaleY(0);
+            transition: transform 0.3s ease-out;
+            z-index: 1;
+          }
+
+          .timeline-item {
+            position: relative;
+            width: 100%;
+            max-width: 46%;
+            margin-bottom: 60px;
+            z-index: 2;
+          }
+
+          .timeline-item.left {
+            left: 0;
+            text-align: right;
+          }
+
+          .timeline-item.right {
+            left: 54%;
+            text-align: left;
+          }
+
+          .node-dot {
+            width: 20px;
+            height: 20px;
+            background: #00ffff;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: -10px;
+            transform: translateX(-50%);
+            animation: pulseDot 2s infinite;
+            z-index: 3;
+          }
+
+          .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s ease;
+          }
+
+          .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.1);
+          }
+
+          @keyframes pulseDot {
+            0% {
+              box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.5);
+            }
+            70% {
+              box-shadow: 0 0 0 10px rgba(0, 255, 255, 0);
+            }
+            100% {
+              box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
+            }
+          }
+
+          @media (max-width: 768px) {
+            .timeline-line {
+              left: 20px;
+            }
+
+            .timeline-item {
+              max-width: 100%;
+              left: 0 !important;
+              padding-left: 40px;
+              text-align: left;
+            }
+
+            .node-dot {
+              left: 20px;
+            }
+          }
+        `}</style>
+      </section>
+
+      <section
+        className="py-5"
+        style={{
+          background: "linear-gradient(to right, #111, #1e1e1e)",
+          color: "#fff",
+        }}
+      >
+        <div className="container">
+          <div className="row align-items-center">
+            {/* Left Column - Contact Info */}
+            <motion.div
+              className="col-md-6 mb-4 mb-md-0"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="display-5 fw-bold mb-3 d-flex align-items-center gap-2">
+                <MessageIcon className="text-info" />
+                Get in Touch
+              </h2>
+              <p className="lead mb-4">
+                Ready to build something awesome? Our team is excited to hear
+                your ideas and collaborate on your success.
+              </p>
+
+              <ul className="list-unstyled fs-5">
+                <li className="mb-3 d-flex align-items-center gap-3">
+                  <EmailIcon className="text-cyan" />
+                  <span>hello@synctriotech.com</span>
+                </li>
+                <li className="mb-3 d-flex align-items-center gap-3">
+                  <PhoneIcon className="text-cyan" />
+                  <span>+977-1234567890</span>
+                </li>
+              </ul>
+
+              <a
+                href="#contact"
+                className="btn fw-bold mt-3 px-4 py-2 gradient-btn"
+              >
+                Let’s Discuss Your Project!
+              </a>
+
+              <style>
+                {`
+    .gradient-btn {
+      background: linear-gradient(135deg, #00ffff, #00bcd4);
+      color: #0a0a0a;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+    }
+
+    .gradient-btn:hover {
+      background: linear-gradient(135deg, #00bcd4, #00ffff);
+      color: #000;
+      box-shadow: 0 6px 25px rgba(0, 255, 255, 0.4);
+      transform: translateY(-2px);
+    }
+  `}
+              </style>
+            </motion.div>
+
+            {/* Right Column - Animated Visual with MUI Icons */}
+            <motion.div
+              className="col-md-6"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="row g-3 justify-content-center">
+                {[SupportAgentIcon, ChatBubbleOutlineIcon, EmailIcon].map(
+                  (IconComponent, idx) => (
+                    <motion.div
+                      key={idx}
+                      className="col-4"
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div
+                        className="d-flex flex-column align-items-center justify-content-center text-center p-4 rounded"
+                        style={{
+                          background: "rgba(255,255,255,0.05)",
+                          border: "1px solid rgba(255,255,255,0.1)",
+                          borderRadius: "1rem",
+                          backdropFilter: "blur(6px)",
+                          boxShadow: "0 0 20px rgba(0, 255, 255, 0.05)",
+                          transition: "all 0.3s ease",
+                          height: "100%",
+                        }}
+                      >
+                        <IconComponent
+                          style={{ fontSize: "2rem" }}
+                          className="text-info mb-2"
+                        />
+                        <small className="text-white">Connect</small>
+                      </div>
+                    </motion.div>
+                  )
+                )}
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </section>
     </>
   );

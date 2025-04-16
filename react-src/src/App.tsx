@@ -5,18 +5,18 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import GoToTopButton from "./components/GoToTopButton";
 
 const App: React.FC = () => {
   return (
     <Router>
-      {/* Ensure Router wraps everything */}
-      <Header /> {/* This is rendered in the header-root */}
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
-      <Footer /> {/* This is rendered in the footer-root */}
+      <Footer />
     </Router>
   );
 };
