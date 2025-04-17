@@ -59,14 +59,14 @@ section {
     text-align: center;
 }
 
-.hero-title {
+/* .hero-title {
     font-size: 3rem;
     font-weight: 800;
     line-height: 1.2;
     color: #0f172a;
     max-width: 900px;
     margin: 0 auto;
-}
+} */
 
 .hero-subtitle {
     font-size: 1.25rem;

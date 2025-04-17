@@ -123,13 +123,13 @@ const Header: React.FC = () => {
         {/* Footer Section in Menu */}
         <div style={{ marginTop: "40px" }}>
           {/* CTA */}
+
           <Link
+            className="hero-button"
             to="/contact"
             onClick={toggleMenu}
             style={{
               display: "block",
-              background: "#00ffff",
-              color: "#000",
               textAlign: "center",
               padding: "10px 20px",
               borderRadius: "8px",
@@ -141,7 +141,6 @@ const Header: React.FC = () => {
           >
             Let's Talk
           </Link>
-
           {/* Socials */}
           <div
             style={{ display: "flex", justifyContent: "center", gap: "20px" }}

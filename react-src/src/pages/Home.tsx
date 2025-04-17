@@ -34,6 +34,8 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import MessageIcon from "@mui/icons-material/MarkEmailUnread";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import FloatingNav from "../components/SectionNav"; // adjust the path as needed
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 
 const Home: React.FC = () => {
   const timelineRef = useRef(null);
@@ -59,8 +61,10 @@ const Home: React.FC = () => {
     <>
       {/* Header Section */}
       <Header />
+
       {/* Hero Section */}
       <section
+        id="hero"
         className="hero full-width-hero d-flex justify-content-center align-items-center text-center"
         style={{
           position: "relative",
@@ -79,8 +83,9 @@ const Home: React.FC = () => {
           className="z-2"
           style={{ maxWidth: "900px", padding: "20px", width: "100%" }}
         >
+          {/* Hero Title with Shorter Sentence */}
           <motion.h1
-            initial={{ opacity: 0, y: -40 }}
+            initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
             className="hero-title mb-3"
@@ -90,28 +95,67 @@ const Home: React.FC = () => {
               background: "linear-gradient(90deg, #00e0ff, #40ffba)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              textShadow: "0 0 15px rgba(0,255,255,0.2)",
+              textShadow: "0 0 10px rgba(0, 224, 255, 0.3)",
               letterSpacing: "1px",
+              position: "relative",
+              display: "inline-block",
             }}
           >
-            <span className="typewriter-wrapper">
-              <Typewriter
-                options={{
-                  strings: [
-                    "Your Concept, We Build",
-                    "Grow with Technology",
-                    "Achieve with SyncTrio",
-                  ],
-                  autoStart: true,
-                  loop: true,
-                  delay: 110,
-                  deleteSpeed: 50,
-                  // pauseFor: 2000,
-                  cursor: "",
+            Build with SyncTrio
+            <motion.span
+              initial={{ opacity: 0, y: -10, x: 10 }}
+              animate={{ opacity: 1, y: -20, x: 0 }}
+              transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
+              style={{
+                position: "absolute",
+                top: "-1.3rem",
+                right: "-2.5rem",
+                fontSize: "1rem",
+                background: "linear-gradient(to right, #00e0ff, #40ffba)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                fontWeight: "600",
+                letterSpacing: "0.5px",
+              }}
+            >
+              Tech
+            </motion.span>
+          </motion.h1>
+
+          {/* Subtitles with Icons (Animated) */}
+          <div className="d-flex justify-content-center gap-4 mt-3">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              <TrendingUpIcon
+                sx={{
+                  fontSize: 40,
+                  background: "linear-gradient(135deg, #00f2ff, #00ffa8)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  filter: "drop-shadow(0 0 5px #00ffcc)",
                 }}
               />
-            </span>
-          </motion.h1>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+            >
+              <WorkspacePremiumIcon
+                sx={{
+                  fontSize: 40,
+                  background: "linear-gradient(135deg, #00c2ff, #00ffb3)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  filter: "drop-shadow(0 0 5px #00ffee)",
+                }}
+              />
+            </motion.div>
+          </div>
 
           <div className="hero-icons d-flex justify-content-center gap-4 mt-5">
             {[Code, Cloud, Security, Devices].map((Icon, i) => (
@@ -147,12 +191,6 @@ const Home: React.FC = () => {
             className="scroll-indicator z-2"
             initial={{ y: 0 }}
             animate={{ y: [0, 10, 0] }}
-            // transition={{
-            //   repeat: Infinity,
-            //   duration: 1.5,
-            //   ease: "easeInOut",
-            // }}
-
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
@@ -169,6 +207,7 @@ const Home: React.FC = () => {
           </motion.div>
         </a>
       </section>
+
       {/* Core Pillars Section */}
       <section
         id="core-pillars"
@@ -434,6 +473,7 @@ const Home: React.FC = () => {
       </section>
       {/* Services Section */}
       <section
+        id="services"
         className="services-section text-white"
         style={{
           background: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
@@ -807,6 +847,7 @@ const Home: React.FC = () => {
       </section>
       {/* Testimonial Section */}
       <section
+        id="testimonials"
         className="testimonials-section py-5"
         style={{
           background: "linear-gradient(to right, #1c1c1c, #2b2b2b)",
@@ -1042,10 +1083,7 @@ const Home: React.FC = () => {
                 </li>
               </ul>
 
-              <a
-                href="#contact"
-                className="btn fw-bold mt-3 px-4 py-2 gradient-btn"
-              >
+              <a href="#contact" className="hero-button">
                 Let’s Discuss Your Project!
               </a>
 
@@ -1113,6 +1151,8 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+      {/* Floating Navigation */}
+      <FloatingNav />
     </>
   );
 };
