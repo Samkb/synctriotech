@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "target": "ES6", // or ES2015 or higher
+    "lib": ["DOM", "ES2015"], // include "ES2015" here
+    "module": "ESNext",
     "jsx": "react-jsx",
     "moduleResolution": "node",
     "esModuleInterop": true,

@@ -103,7 +103,7 @@ const Header: React.FC = () => {
           {["Home", "About", "Contact"].map((item, index) => (
             <Link
               key={index}
-              to={`/${item.toLowerCase()}`}
+              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
               onClick={() => setMenuOpen(false)}
               style={{
                 display: "block",

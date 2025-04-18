@@ -21,6 +21,14 @@ function synctriotech_enqueue_scripts()
         true // Load in footer
     );
 
+
+
+    wp_localize_script('synctriotech-react', 'SyncTrioRest', array(
+        'api_base_url' => esc_url_raw(rest_url('synctrio/v1/contact')),
+
+    ));
+
+
     // Enqueue the theme stylesheet (for global styles)
     wp_enqueue_style(
         'synctriotech-style',
@@ -35,3 +43,7 @@ function synctriotech_enqueue_scripts()
 }
 
 add_action('wp_enqueue_scripts', 'synctriotech_enqueue_scripts');
+
+
+// In functions.php
+require_once get_template_directory() . '/includes/synctrio-tech-rest-api.php';

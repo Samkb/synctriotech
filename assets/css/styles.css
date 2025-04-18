@@ -10,7 +10,7 @@ body {
 }
 
 /* Each section should fill screen and snap */
-section {
+.homepage section {
     min-height: 100vh;
     scroll-snap-align: start;
     display: flex;
