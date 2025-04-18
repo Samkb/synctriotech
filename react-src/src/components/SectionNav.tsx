@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import HomeIcon from "@mui/icons-material/Home";
+import LayersIcon from "@mui/icons-material/Layers"; // Core Pillars
 import InfoIcon from "@mui/icons-material/Info";
 import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices";
-import ContactMailIcon from "@mui/icons-material/ContactMail";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext"; // New icon
+import VerifiedIcon from "@mui/icons-material/Verified"; // Why Choose Us
+import WorkIcon from "@mui/icons-material/Work"; // Portfolio
+import StarIcon from "@mui/icons-material/Star"; // Testimonials
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward"; // Navigation icon
 import CloseIcon from "@mui/icons-material/Close";
 
 const navItems = [
   { icon: <HomeIcon />, label: "Hero", target: "#hero" },
+  { icon: <LayersIcon />, label: "Core Pillars", target: "#core-pillars" },
   { icon: <InfoIcon />, label: "About", target: "#about" },
   {
     icon: <MiscellaneousServicesIcon />,
     label: "Services",
     target: "#services",
   },
-  { icon: <ContactMailIcon />, label: "Contact", target: "#contact" },
+  { icon: <VerifiedIcon />, label: "Why Choose Us", target: "#why-choose-us" },
+  { icon: <WorkIcon />, label: "Portfolio", target: "#portfolio" },
+  { icon: <StarIcon />, label: "Testimonials", target: "#testimonials" },
 ];
 
 const FloatingNav: React.FC = () => {
@@ -29,17 +35,12 @@ const FloatingNav: React.FC = () => {
     }
   };
 
-  // Hide last two items when nav is revealed
-  const visibleNavItems = isOpen ? navItems : navItems.slice(0, 2);
-
   return (
     <div style={styles.wrapper}>
-      {/* FAB toggle button with new icon */}
       <div style={styles.fab} onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <CloseIcon /> : <NavigateNextIcon />} {/* New icon */}
+        {isOpen ? <CloseIcon /> : <ArrowForwardIcon />} {/* Changed icon */}
       </div>
 
-      {/* Navigation icons reveal */}
       <AnimatePresence>
         {isOpen && (
           <motion.ul
@@ -49,7 +50,7 @@ const FloatingNav: React.FC = () => {
             transition={{ duration: 0.3 }}
             style={styles.iconList}
           >
-            {visibleNavItems.map((item, index) => (
+            {navItems.map((item, index) => (
               <motion.li
                 key={index}
                 whileHover={{ scale: 1.15 }}
@@ -77,7 +78,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: "fixed",
     top: "50%",
     right: "20px",
-    transform: "translateY(-50%)", // Center vertically between sections
+    transform: "translateY(-50%)",
     zIndex: 5000,
   },
   fab: {
@@ -92,11 +93,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     cursor: "pointer",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
     fontSize: "1.4rem",
-    transition: "filter 0.3s", // Add transition for hover effect
-  },
-  // Add hover effect to make the button brighter
-  fabHover: {
-    filter: "brightness(1.2)", // Increase brightness on hover
+    transition: "filter 0.3s",
   },
   iconList: {
     position: "absolute",

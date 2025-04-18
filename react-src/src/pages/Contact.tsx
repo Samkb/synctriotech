@@ -65,6 +65,8 @@ const Contact: React.FC = () => {
         "",
     };
 
+    console.log("Submitting data: ", formData);
+
     try {
       setLoading(true);
       const response = await fetch(SyncTrioRest.api_base_url, {

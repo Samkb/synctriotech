@@ -601,6 +601,7 @@ const Home: React.FC = () => {
         </section>
         {/* Why Choose US Section */}
         <section
+          id="why-choose-us"
           className="why-choose-us-section text-center"
           style={{
             background: "linear-gradient(135deg, #000814, #001d3d)",
@@ -738,6 +739,7 @@ const Home: React.FC = () => {
         </section>
         {/* Our Works Section */}
         <section
+          id="portfolio"
           className="portfolio-section py-5"
           style={{
             background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)",
@@ -763,20 +765,20 @@ const Home: React.FC = () => {
                 {
                   image:
                     "/wp-content/themes/synctriotech/react-src/public/assets/client1.png",
-                  title: "E-Commerce App",
-                  subtitle: "Mobile-first design & conversion-focused UI",
+                  title: "UK SANSAR",
+                  subtitle: "Design, Development",
                 },
                 {
                   image:
                     "/wp-content/themes/synctriotech/react-src/public/assets/client2.png",
-                  title: "CRM Dashboard",
-                  subtitle: "Real-time analytics and automation",
+                  title: "UK SANSAR ESTATE AGENCY",
+                  subtitle: "Design, Develop, API Integration",
                 },
                 {
                   image:
                     "/wp-content/themes/synctriotech/react-src/public/assets/client3.png",
-                  title: "SaaS Platform",
-                  subtitle: "Robust backend and cloud-ready infrastructure",
+                  title: "DOKO HOMES",
+                  subtitle: "Design, Development",
                 },
               ].map(({ image, title, subtitle }, index) => (
                 <motion.div
