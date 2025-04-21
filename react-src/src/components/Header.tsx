@@ -100,7 +100,7 @@ const Header: React.FC = () => {
         </div>
 
         <nav>
-          {["Home", "About", "Contact"].map((item, index) => (
+          {["Home", "About", "Services", "Contact"].map((item, index) => (
             <Link
               key={index}
               to={item === "Home" ? "/" : `/${item.toLowerCase()}`}

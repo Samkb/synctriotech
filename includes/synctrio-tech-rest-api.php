@@ -1,31 +1,31 @@
 <?php
 add_action('rest_api_init', function () {
-    register_rest_route('synctrio/v1', '/contact', [
-        'methods'  => 'POST',
-        'callback' => 'synctrio_send_contact_email',
-        'permission_callback' => '__return_true',
-    ]);
+  register_rest_route('synctrio/v1', '/contact', [
+    'methods'  => 'POST',
+    'callback' => 'synctrio_send_contact_email',
+    'permission_callback' => '__return_true',
+  ]);
 });
 
 
 function synctrio_send_contact_email($request)
 {
-    $params = $request->get_json_params();
+  $params = $request->get_json_params();
 
-    $name     = sanitize_text_field($params['name']);
-    $email    = sanitize_email($params['email']);
-    $message  = sanitize_textarea_field($params['message']);
-    $budget   = sanitize_text_field($params['budget']);
-    $project  = sanitize_text_field($params['projectType']);
+  $name     = sanitize_text_field($params['name']);
+  $email    = sanitize_email($params['email']);
+  $message  = sanitize_textarea_field($params['message']);
+  $budget   = sanitize_text_field($params['budget']);
+  $project  = sanitize_text_field($params['projectType']);
 
-    $to      = 'shyam.kumarc3@gmail.com'; // Change this to your desired receiver
-    $subject = 'New Contact Form Submission';
-    $headers = ['Content-Type: text/html; charset=UTF-8', "Reply-To: $name <$email>"];
+  $to      = 'shyam.kumarc3@gmail.com'; // Change this to your desired receiver
+  $subject = 'New Contact Form Submission';
+  $headers = ['Content-Type: text/html; charset=UTF-8', "Reply-To: $name <$email>"];
 
-    $logo_url = 'https://synctriotech.com/wp-content/uploads/2024/04/synctriotech-logo.png'; // Replace with your actual logo URL
-    $website_url = 'https://synctriotech.com';
+  $logo_url = 'https://synctriotech.com/wp-content/uploads/2024/04/synctriotech-logo.png'; // Replace with your actual logo URL
+  $website_url = 'https://synctrio.com';
 
-    $body = "
+  $body = "
   <div style='font-family: Arial, sans-serif; background-color: #f7f9fb; padding: 20px; color: #333;'>
     <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.05);'>
 
@@ -72,14 +72,14 @@ function synctrio_send_contact_email($request)
 
 
 
-    $mail_sent = wp_mail($to, $subject, $body, $headers);
+  $mail_sent = wp_mail($to, $subject, $body, $headers);
 
-    if ($mail_sent) {
-        // Send Thank You Email to Sender
-        $user_subject = 'Got your message! Let’s build something great together';
-        $user_headers = ['Content-Type: text/html; charset=UTF-8'];
+  if ($mail_sent) {
+    // Send Thank You Email to Sender
+    $user_subject = 'Got your message! Let’s build something great together';
+    $user_headers = ['Content-Type: text/html; charset=UTF-8'];
 
-        $user_body = "
+    $user_body = "
       <div style='font-family: Arial, sans-serif; background-color: #f7f9fb; padding: 20px; color: #333;'>
         <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.05);'>
         
@@ -128,10 +128,10 @@ function synctrio_send_contact_email($request)
       </div>
     ";
 
-        wp_mail($email, $user_subject, $user_body, $user_headers); // Send thank-you to user
+    wp_mail($email, $user_subject, $user_body, $user_headers); // Send thank-you to user
 
-        return new WP_REST_Response(['success' => true, 'message' => 'Email sent successfully!'], 200);
-    } else {
-        return new WP_REST_Response(['success' => false, 'message' => 'Failed to send email.'], 500);
-    }
+    return new WP_REST_Response(['success' => true, 'message' => 'Email sent successfully!'], 200);
+  } else {
+    return new WP_REST_Response(['success' => false, 'message' => 'Failed to send email.'], 500);
+  }
 }

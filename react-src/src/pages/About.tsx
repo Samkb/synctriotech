@@ -55,7 +55,7 @@ const About: React.FC = () => {
       <section
         className="py-5"
         style={{
-          background: "linear-gradient(135deg, #303030, #1976d2)",
+          background: "linear-gradient(135deg, #1c1c1c, #1565c0, #00cc99)",
           color: "white",
         }}
       >
@@ -135,7 +135,7 @@ const About: React.FC = () => {
       <section
         className="py-5 text-center text-white"
         style={{
-          background: "linear-gradient(135deg, #000000, #1e3c72, #2a5298)",
+          background: "linear-gradient(135deg, #101820, #1e3c72, #29a3a3)",
         }}
       >
         <div className="container">

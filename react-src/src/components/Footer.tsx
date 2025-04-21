@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
               </li>
             </ul>
 
-            <a href="#contact" className="hero-button">
+            <a href="/contact" className="hero-button">
               Let’s Discuss Your Project!
             </a>
           </motion.div>
