@@ -22,7 +22,6 @@ import { Link } from "react-router-dom";
 import SparkleCanvas from "../components/SparkleCanvas";
 import Header from "../components/Header"; // Import your Header component here
 import Footer from "../components/Footer"; // Import your Header component here
-import Typewriter from "typewriter-effect";
 import MouseIcon from "@mui/icons-material/Mouse";
 import BuildIcon from "@mui/icons-material/Build";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
@@ -30,13 +29,12 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import HandshakeIcon from "@mui/icons-material/Handshake";
-import EmailIcon from "@mui/icons-material/Email";
-import PhoneIcon from "@mui/icons-material/Phone";
-import MessageIcon from "@mui/icons-material/MarkEmailUnread";
-import SupportAgentIcon from "@mui/icons-material/SupportAgent";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import FloatingNav from "../components/SectionNav"; // adjust the path as needed
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import Lottie from "lottie-react";
+import handshakeAnimation from "../assets/lotties/handshake.json";
+import progressAnimation from "../assets/lotties/progress.json";
+import celebrationAnimation from "../assets/lotties/celebration.json";
 
 const Home: React.FC = () => {
   const timelineRef = useRef(null);
@@ -89,87 +87,104 @@ const Home: React.FC = () => {
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
-              className="hero-title mb-3"
+              className="hero-title mb-3 text-center"
               style={{
                 fontSize: "3.5rem",
-                fontWeight: "800",
+                fontWeight: 800,
                 background: "linear-gradient(90deg, #00e0ff, #40ffba)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                textShadow: "0 0 10px rgba(0, 224, 255, 0.3)",
                 letterSpacing: "1px",
+                lineHeight: 1.2,
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                gap: "0.5rem",
                 position: "relative",
-                display: "inline-block",
               }}
             >
-              Build with SyncTrio
-              <motion.span
-                initial={{ opacity: 0, y: -10, x: 10 }}
-                animate={{ opacity: 1, y: -20, x: 0 }}
-                transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
+              Build with
+              <span
                 style={{
-                  position: "absolute",
-                  top: "0.7rem",
-                  right: "-2.5rem",
-                  fontSize: "1rem",
-                  background: "linear-gradient(to right, #00e0ff, #40ffba)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  fontWeight: "600",
-                  letterSpacing: "0.5px",
+                  display: "inline-block",
+                  position: "relative",
+                  marginLeft: "10px",
+                  padding: "4px 10px",
+                  borderRadius: "12px",
+                  background:
+                    "linear-gradient(135deg, rgba(0,224,255,0.15), rgba(64,255,186,0.15))",
+                  backdropFilter: "blur(6px)",
+                  WebkitBackdropFilter: "blur(6px)",
                 }}
               >
-                Tech
-              </motion.span>
+                <span
+                  style={{
+                    background: "linear-gradient(90deg, #00e0ff, #40ffba)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  SyncTrio
+                </span>
+
+                <motion.span
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
+                  style={{
+                    position: "absolute",
+                    top: "-1.2rem",
+                    right: "-0.5rem",
+                    fontSize: "0.9rem",
+                    background: "linear-gradient(to right, #00e0ff, #40ffba)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    fontWeight: 600,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Tech
+                </motion.span>
+              </span>
             </motion.h1>
 
             {/* Subtitles with Icons (Animated) */}
-            <div className="d-flex justify-content-center gap-4 mt-3">
+            <div className="d-flex justify-content-center gap-4 mt-3 flex-wrap">
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
+                style={{
+                  width: "clamp(100px, 15vw, 140px)",
+                  height: "clamp(100px, 15vw, 140px)",
+                }}
               >
-                <TrendingUpIcon
-                  sx={{
-                    fontSize: 40,
-                    background: "linear-gradient(135deg, #00f2ff, #00ffa8)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    filter: "drop-shadow(0 0 5px #00ffcc)",
-                  }}
-                />
+                <Lottie animationData={handshakeAnimation} loop={true} />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.8 }}
+                style={{
+                  width: "clamp(100px, 15vw, 140px)",
+                  height: "clamp(100px, 15vw, 140px)",
+                }}
+              >
+                <Lottie animationData={progressAnimation} loop={true} />
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8, duration: 0.8 }}
+                transition={{ delay: 1.1, duration: 0.8 }}
+                style={{
+                  width: "clamp(100px, 15vw, 140px)",
+                  height: "clamp(100px, 15vw, 140px)",
+                }}
               >
-                <WorkspacePremiumIcon
-                  sx={{
-                    fontSize: 40,
-                    background: "linear-gradient(135deg, #00c2ff, #00ffb3)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    filter: "drop-shadow(0 0 5px #00ffee)",
-                  }}
-                />
+                <Lottie animationData={celebrationAnimation} loop={true} />
               </motion.div>
-            </div>
-
-            <div className="hero-icons d-flex justify-content-center gap-4 mt-5">
-              {[Code, Cloud, Security, Devices].map((Icon, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 + i * 0.2, duration: 0.6 }}
-                  className="text-light fs-2"
-                >
-                  <Icon style={{ fontSize: "2.3rem" }} />
-                </motion.div>
-              ))}
             </div>
 
             <div className="text-center mt-4">

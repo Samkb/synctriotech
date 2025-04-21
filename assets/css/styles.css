@@ -528,3 +528,40 @@ body {
 .contact-us-section .cta-button:hover {
     background-color: #2563eb;
 }
+
+
+/* Smooth blink animation */
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.05);
+    }
+}
+
+/* Fade out other items */
+.about-section:hover .fade-on-hover {
+    opacity: 0.3;
+    transition: opacity 0.5s ease;
+}
+
+/* Hover active on Start a Project only */
+.about-section:hover .project-hover {
+    animation: blink 1.5s infinite ease-in-out;
+}
+
+.start-project-box {
+    border: 2px solid transparent;
+    transition: transform 0.4s, border-color 0.4s;
+}
+
+.project-hover:hover .start-project-box {
+    transform: scale(1.05);
+    border-color: #00ff88;
+}

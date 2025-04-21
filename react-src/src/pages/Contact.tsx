@@ -4,8 +4,8 @@ import { Email, Phone, LocationOn, Send } from "@mui/icons-material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import SvgIcon from "@mui/material/SvgIcon";
 
-const SyncTrioRest = window.SyncTrioRest || {};
-console.log(SyncTrioRest, "rest url");
+const SyncTrioRestUrl = window.SyncTrioRest || {};
+console.log(SyncTrioRestUrl, "rest url");
 
 // Custom Viber Icon
 
@@ -69,7 +69,7 @@ const Contact: React.FC = () => {
 
     try {
       setLoading(true);
-      const response = await fetch(SyncTrioRest.api_base_url, {
+      const response = await fetch(SyncTrioRestUrl.api_base_url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -305,8 +305,8 @@ Till then, chill and let the tech vibes flow ✨`);
                     className="hero-button align-items-center gap-2"
                     disabled={loading}
                   >
-                    <Send />
                     {loading ? "Sending..." : "Send Message"}
+                    <Send />
                   </button>
                 </form>
                 {responseMsg && (
