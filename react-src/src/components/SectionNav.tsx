@@ -21,7 +21,6 @@ const navItems = [
   },
   { icon: <VerifiedIcon />, label: "Why Choose Us", target: "#why-choose-us" },
   { icon: <WorkIcon />, label: "Portfolio", target: "#portfolio" },
-  { icon: <StarIcon />, label: "Testimonials", target: "#testimonials" },
 ];
 
 const FloatingNav: React.FC = () => {

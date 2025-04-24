@@ -1,28 +1,58 @@
 /* styles.css */
-/* Enable vertical scroll snapping */
+
 html,
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
     overflow-x: hidden;
-    /* 💡 Prevent horizontal scroll on mobile */
-    overflow-y: auto;
-    box-sizing: border-box;
-}
-
-/* Each section should fill screen and snap */
-.homepage section {
-    min-height: 100vh;
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    /* 👈 Prevent horizontal scrolling */
+    width: 100%;
+    /* 👈 Ensures full-width only */
 }
 
 
+
+.homepage>section.footer {
+    height: unset;
+    /* ✅ Removes the 100vh only for footer */
+}
+
+
+
+.homepage {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.py-5 {
+    padding-top: 6rem !important;
+    padding-bottom: 3rem !important;
+}
+
+/* Apply scroll snap only for desktop (min-width: 992px or your preferred breakpoint) */
+@media screen and (min-width: 992px) {
+    .homepage {
+        scroll-snap-type: y mandatory;
+        height: 100vh;
+        overflow-y: scroll;
+    }
+
+    .homepage>section {
+        scroll-snap-align: start;
+        height: 100vh;
+    }
+
+    /* Optional: disable scroll bar in desktop if not needed visually */
+    .homepage::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+
+/* 🔧 Optional: Disable 100vh for ALL sections on small screens */
+@media (max-width: 768px) {
+    .homepage>section {
+        height: auto;
+    }
+}
 
 .scroll-indicator {
     position: absolute;
@@ -73,14 +103,6 @@ body {
     text-align: center;
 }
 
-/* .hero-title {
-    font-size: 3rem;
-    font-weight: 800;
-    line-height: 1.2;
-    color: #0f172a;
-    max-width: 900px;
-    margin: 0 auto;
-} */
 
 .hero-subtitle {
     font-size: 1.25rem;
@@ -98,7 +120,8 @@ body {
     font-weight: 600;
     text-decoration: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: background-position 0.4s ease, transform 0.3s ease;
+    transition: background 0.4s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    text-decoration: none;
     display: inline-block;
 }
 
@@ -108,19 +131,36 @@ body {
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
+.hero-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: #00d1ff;
+    color: #ffffff;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.4s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+.hero-button:hover {
+    background: linear-gradient(45deg, #076d84, #261fae, #024a20);
+    color: #ffffff;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+}
+
+
+
 
 .text-gradient {
     background: linear-gradient(90deg, #00ffcc, #00d1ff, #00ff6a);
     -webkit-background-clip: text;
     color: transparent;
-}
-
-.typewriter-wrapper {
-    display: inline-block;
-    background: linear-gradient(90deg, #00bcd4, #2196f3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 600;
 }
 
 /* hero icon  */
@@ -195,30 +235,7 @@ body {
     /* Accent color on hover */
 }
 
-.hero-button {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: 600;
-    text-transform: uppercase;
-    background-color: #00d1ff;
-    color: #ffffff;
-    border: 2px solid transparent;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    text-decoration: none;
-}
 
-.hero-button:hover {
-    background: linear-gradient(45deg, #00d1ff, #00ffcc, #00ff6a);
-    border: 2px solid transparent;
-    color: #000000;
-    /* Change text color on hover */
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
-    transform: scale(1.1);
-}
 
 .hero-icons {
     display: flex;

@@ -144,6 +144,7 @@ const Header: React.FC = () => {
 
         <div style={{ marginTop: "40px" }}>
           <Link
+            className="hero-button"
             to="/contact"
             onClick={toggleMenu}
             style={{
@@ -163,14 +164,6 @@ const Header: React.FC = () => {
             style={{ display: "flex", justifyContent: "center", gap: "20px" }}
           >
             <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "#fff" }}
-            >
-              <GitHubIcon />
-            </a>
-            <a
               href="https://linkedin.com/"
               target="_blank"
               rel="noopener noreferrer"
@@ -178,7 +171,7 @@ const Header: React.FC = () => {
             >
               <LinkedInIcon />
             </a>
-            <a href="mailto:hello@synctriotech.com" style={{ color: "#fff" }}>
+            <a href="mailto:hello@synctrio.com" style={{ color: "#fff" }}>
               <EmailIcon />
             </a>
           </div>

@@ -5,11 +5,12 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   return (
     <section
-      className="py-5"
+      className="py-5 footer"
       style={{
         background: "linear-gradient(to right, #111, #1e1e1e)",
         color: "#fff",
@@ -36,17 +37,17 @@ const Footer: React.FC = () => {
             <ul className="list-unstyled fs-5">
               <li className="mb-3 d-flex align-items-center gap-3">
                 <EmailIcon className="text-cyan" />
-                <span>hello@synctriotech.com</span>
+                <span>hello@synctrio.com</span>
               </li>
               <li className="mb-3 d-flex align-items-center gap-3">
                 <PhoneIcon className="text-cyan" />
-                <span>+977-1234567890</span>
+                <span>+977-9849121600</span>
               </li>
             </ul>
 
-            <a href="/contact" className="hero-button">
+            <Link to="/contact" className="hero-button fw-semibold">
               Let’s Discuss Your Project!
-            </a>
+            </Link>
           </motion.div>
 
           {/* Right Column - Animated Icons */}

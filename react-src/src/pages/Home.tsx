@@ -39,22 +39,22 @@ import celebrationAnimation from "../assets/lotties/celebration.json";
 const Home: React.FC = () => {
   const timelineRef = useRef(null);
 
-  useEffect(() => {
-    const line = timelineRef.current;
+  // useEffect(() => {
+  //   const line = timelineRef.current;
 
-    const animateLine = () => {
-      const rect = line.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const totalHeight = line.scrollHeight;
-      const visible = Math.min(windowHeight - rect.top, totalHeight);
-      const progress = Math.max(0, Math.min(1, visible / totalHeight));
-      line.style.transform = `scaleY(${progress})`;
-    };
+  //   const animateLine = () => {
+  //     const rect = line.getBoundingClientRect();
+  //     const windowHeight = window.innerHeight;
+  //     const totalHeight = line.scrollHeight;
+  //     const visible = Math.min(windowHeight - rect.top, totalHeight);
+  //     const progress = Math.max(0, Math.min(1, visible / totalHeight));
+  //     line.style.transform = `scaleY(${progress})`;
+  //   };
 
-    animateLine();
-    window.addEventListener("scroll", animateLine);
-    return () => window.removeEventListener("scroll", animateLine);
-  }, []);
+  //   animateLine();
+  //   window.addEventListener("scroll", animateLine);
+  //   return () => window.removeEventListener("scroll", animateLine);
+  // }, []);
 
   return (
     <>
@@ -893,7 +893,7 @@ const Home: React.FC = () => {
   `}</style>
         </section>
         {/* Testimonial Section */}
-        <section
+        {/* <section
           id="testimonials"
           className="testimonials-section py-5"
           style={{
@@ -1092,7 +1092,7 @@ const Home: React.FC = () => {
             }
           }
         `}</style>
-        </section>
+        </section> */}
 
         <Footer />
         {/* Floating Navigation */}

@@ -158,22 +158,22 @@ Till then, chill and let the tech vibes flow ✨`);
 
                 <p className="d-flex align-items-center gap-2 mb-3">
                   <Email className="text-info" />
-                  hello@synctriotech.com
+                  hello@synctrio.com
                 </p>
 
                 <p className="d-flex align-items-center gap-2 mb-3">
                   <Phone className="text-info" />
                   <a
-                    href="tel:+9771234567890"
+                    href="tel:+9779849121600"
                     className="text-decoration-none text-light"
                   >
-                    +977-1234567890
+                    +977-9849121600
                   </a>
                 </p>
 
                 <p className="d-flex align-items-center gap-2 mb-3">
                   <a
-                    href="https://wa.me/9771234567890"
+                    href="https://wa.me/9779849121600"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="d-flex align-items-center gap-2 text-decoration-none text-light"
@@ -185,7 +185,7 @@ Till then, chill and let the tech vibes flow ✨`);
 
                 <p className="d-flex align-items-center gap-2 mb-3">
                   <a
-                    href="viber://add?number=9771234567890"
+                    href="viber://add?number=9779849121600"
                     className="d-flex align-items-center gap-2 text-decoration-none text-light"
                     onClick={(e) => {
                       // Optional: Check for browser/device support
@@ -203,7 +203,7 @@ Till then, chill and let the tech vibes flow ✨`);
 
                 <p className="d-flex align-items-center gap-2">
                   <LocationOn className="text-info" />
-                  Kathmandu, Nepal
+                  United Kingdom, Nepal
                 </p>
               </div>
 
@@ -271,6 +271,9 @@ Till then, chill and let the tech vibes flow ✨`);
                       <option>Redesign / Rebuild</option>
                       <option>Features Addition</option>
                       <option>E-commerce Development</option>
+                      <option>App Development</option>
+                      <option>API Development/Integration</option>
+                      <option>SEO Service</option>
                       <option>Others</option>
                     </select>
                   </div>

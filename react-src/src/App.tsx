@@ -5,6 +5,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -19,27 +20,26 @@ const Layout: React.FC = () => {
 
   return (
     <>
+      {/* Conditionally render Header */}
       {isHome ? <HeaderHome /> : <HeaderDefault />}
-      <div
-        style={{
-          paddingTop: "45px",
-        }}
-        className="responsive-padding"
-      >
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </div>
-      <Footer />
+
+      {/* Page routes */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+
+      {/* Render Footer only if not on Home page */}
+      {!isHome && <Footer />}
     </>
   );
 };
 
 const App: React.FC = () => (
   <Router>
+    <ScrollToTop />
     <Layout />
   </Router>
 );

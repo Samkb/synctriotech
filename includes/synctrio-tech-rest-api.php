@@ -22,7 +22,7 @@ function synctrio_send_contact_email($request)
   $subject = 'New Contact Form Submission';
   $headers = ['Content-Type: text/html; charset=UTF-8', "Reply-To: $name <$email>"];
 
-  $logo_url = 'https://synctriotech.com/wp-content/uploads/2024/04/synctriotech-logo.png'; // Replace with your actual logo URL
+  $logo_url = 'https://synctrio.com/wp-content/uploads/2024/04/synctriotech-logo.png'; // Replace with your actual logo URL
   $website_url = 'https://synctrio.com';
 
   $body = "
@@ -51,7 +51,7 @@ function synctrio_send_contact_email($request)
 
       <div style='text-align: center;'>
         <p style='margin-bottom: 10px;'>Stay Connected</p>
-        <a href='https://wa.me/9771234567890' style='margin: 0 5px; text-decoration: none;'>
+        <a href='https://wa.me/9779849121600' style='margin: 0 5px; text-decoration: none;'>
           <img src='https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg' alt='WhatsApp' width='24' height='24' />
         </a>
         <a href='https://www.linkedin.com/company/synctriotech' style='margin: 0 5px; text-decoration: none;'>
@@ -109,7 +109,7 @@ function synctrio_send_contact_email($request)
 
           <div style='text-align: center;'>
             <p style='margin-bottom: 10px;'>Follow us for tech tips & updates:</p>
-            <a href='https://wa.me/9771234567890' style='margin: 0 5px; text-decoration: none;'>
+            <a href='https://wa.me/9779849121600' style='margin: 0 5px; text-decoration: none;'>
               <img src='https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg' alt='WhatsApp' width='24' height='24' />
             </a>
             <a href='https://www.linkedin.com/company/synctriotech' style='margin: 0 5px; text-decoration: none;'>

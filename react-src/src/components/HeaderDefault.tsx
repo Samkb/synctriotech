@@ -44,22 +44,19 @@ const HeaderDefault: React.FC = () => {
     <>
       <header
         style={{
-          transform: showHeader ? "translateY(0)" : "translateY(-100%)",
-          transition: "transform 0.3s ease-in-out",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "15px 20px",
+          padding: "20px 40px",
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           zIndex: 20,
           width: "100%",
-          backgroundImage:
-            "linear-gradient(135deg, rgba(17, 17, 17, 0.95) 0%, rgba(0, 51, 102, 0.9) 35%, rgba(0, 102, 255, 0.85) 70%, rgba(0, 204, 136, 0.8) 100%)",
-          backdropFilter: "blur(4px)",
-          boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+          backgroundColor: "transparent",
+          boxShadow: "none",
+          transition: "opacity 0.3s ease, transform 0.3s ease",
         }}
       >
         <Link to="/">
@@ -98,7 +95,7 @@ const HeaderDefault: React.FC = () => {
           right: menuOpen ? 0 : "-100%",
           height: "100%",
           width: "280px",
-          backgroundColor: "#004d40",
+          backgroundColor: "#000",
           color: "#fff",
           padding: "30px 20px",
           transition: "right 0.3s ease-in-out",
@@ -149,6 +146,7 @@ const HeaderDefault: React.FC = () => {
 
         <div style={{ marginTop: "40px" }}>
           <Link
+            className="hero-button"
             to="/contact"
             onClick={() => setMenuOpen(false)}
             style={{
@@ -168,14 +166,6 @@ const HeaderDefault: React.FC = () => {
             style={{ display: "flex", justifyContent: "center", gap: "20px" }}
           >
             <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "#fff" }}
-            >
-              <GitHubIcon />
-            </a>
-            <a
               href="https://linkedin.com/"
               target="_blank"
               rel="noopener noreferrer"
@@ -183,7 +173,7 @@ const HeaderDefault: React.FC = () => {
             >
               <LinkedInIcon />
             </a>
-            <a href="mailto:hello@synctriotech.com" style={{ color: "#fff" }}>
+            <a href="mailto:hello@synctrio.com" style={{ color: "#fff" }}>
               <EmailIcon />
             </a>
           </div>

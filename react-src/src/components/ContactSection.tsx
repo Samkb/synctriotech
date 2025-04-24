@@ -18,23 +18,15 @@ const ContactSection: React.FC = () => {
 
           <div className="mb-4">
             <p className="d-flex align-items-center gap-2 mb-2">
-              <EmailIcon /> hello@synctriotech.com
+              <EmailIcon /> hello@synctrio.com
             </p>
             <p className="d-flex align-items-center gap-2 mb-2">
-              <PhoneIcon /> +977-1234567890
+              <PhoneIcon /> +977-9849121600
             </p>
           </div>
 
           <h5>Connect With Us</h5>
           <div className="d-flex gap-3 mt-2">
-            <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white"
-            >
-              <GitHubIcon />
-            </a>
             <a
               href="https://linkedin.com/"
               target="_blank"
@@ -43,7 +35,7 @@ const ContactSection: React.FC = () => {
             >
               <LinkedInIcon />
             </a>
-            <a href="mailto:hello@synctriotech.com" className="text-white">
+            <a href="mailto:hello@synctrio.com" className="text-white">
               <EmailIcon />
             </a>
           </div>
