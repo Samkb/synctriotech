@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
+import Header from "../components/HeaderHome";
 import { Email, Phone, LocationOn, Send } from "@mui/icons-material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import SvgIcon from "@mui/material/SvgIcon";
@@ -112,8 +112,6 @@ Till then, chill and let the tech vibes flow ✨`);
 
   return (
     <>
-      <Header />
-
       {/* ✅ Full-Width Hero Banner */}
       <div className="contactpage">
         <section

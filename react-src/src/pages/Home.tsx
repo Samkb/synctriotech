@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import SparkleCanvas from "../components/SparkleCanvas";
-import Header from "../components/Header"; // Import your Header component here
+import Header from "../components/HeaderHome"; // Import your Header component here
 import Footer from "../components/Footer"; // Import your Header component here
 import MouseIcon from "@mui/icons-material/Mouse";
 import BuildIcon from "@mui/icons-material/Build";
@@ -391,6 +391,7 @@ const Home: React.FC = () => {
                     display: "flex",
                     justifyContent: "center",
                     gap: "30px",
+                    flexWrap: "wrap", // ✅ Allow wrapping
                     marginBottom: "2rem",
                   }}
                 >
@@ -418,8 +419,9 @@ const Home: React.FC = () => {
                         ease: "easeOut",
                       }}
                       style={{
-                        fontSize: "9rem", // Large icon size
+                        fontSize: "6rem", // Large icon size
                         color: item.color,
+                        flex: "0 0 auto",
                       }}
                     >
                       {item.icon}
@@ -473,14 +475,18 @@ const Home: React.FC = () => {
                           borderRadius: "50%",
                           width: "60px",
                           height: "60px",
+                          minWidth: "60px", // ✅ prevent squishing in flex
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                           color: "#fff",
                           boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
+                          flexShrink: 0, // ✅ avoids shrinking in flex
                         }}
                       >
-                        <span className="fs-3">{item.icon}</span>
+                        <span className="fs-3" style={{ lineHeight: 0 }}>
+                          {item.icon}
+                        </span>
                       </div>
                       <div>
                         <h5 className="text-light fw-bold">{item.title}</h5>

@@ -1,4 +1,18 @@
 <?php
+
+function synctriotech_custom_logo_setup()
+{
+    add_theme_support('custom-logo', array(
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+        'header-text' => array('site-title', 'site-description'),
+    ));
+}
+add_action('after_setup_theme', 'synctriotech_custom_logo_setup');
+
+
 function synctriotech_enqueue_scripts()
 {
     $theme_dir = get_template_directory_uri();
@@ -47,3 +61,37 @@ add_action('wp_enqueue_scripts', 'synctriotech_enqueue_scripts');
 
 // In functions.php
 require_once get_template_directory() . '/includes/synctrio-tech-rest-api.php';
+
+
+
+add_action('rest_api_init', function () {
+    register_rest_field('options', 'custom_logo_url', array(
+        'get_callback' => function () {
+            $custom_logo_id = get_theme_mod('custom_logo');
+            if ($custom_logo_id) {
+                $image = wp_get_attachment_image_src($custom_logo_id, 'full');
+                return $image[0]; // Return URL
+            }
+            return null;
+        },
+        'schema' => null,
+    ));
+});
+
+
+add_action('rest_api_init', function () {
+    register_rest_route('custom/v1', '/site-info', array(
+        'methods' => 'GET',
+        'callback' => function () {
+            $custom_logo_id = get_theme_mod('custom_logo');
+            $logo_url = wp_get_attachment_image_src($custom_logo_id, 'full')[0] ?? null;
+
+            return [
+                'logo' => $logo_url,
+                'site_name' => get_bloginfo('name'),
+                'description' => get_bloginfo('description'),
+            ];
+        },
+        'permission_callback' => '__return_true',
+    ));
+});

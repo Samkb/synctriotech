@@ -1,3 +1,4 @@
+// HeaderDefault.tsx
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -6,41 +7,67 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 
-const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+const HeaderDefault: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
+  // Fetch logo on mount
+  useEffect(() => {
+    const fetchLogo = async () => {
+      try {
+        const res = await fetch("/wp-json/custom/v1/site-info");
+        const data = await res.json();
+        setLogoUrl(data.logo);
+      } catch (err) {
+        console.error("Failed to fetch site logo:", err);
+      }
+    };
+
+    fetchLogo();
+  }, []);
+
+  // Handle scroll behavior
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentY = window.scrollY;
+      setShowHeader(currentY < lastScrollY || currentY < 100);
+      setLastScrollY(currentY);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   return (
     <>
       <header
         style={{
+          transform: showHeader ? "translateY(0)" : "translateY(-100%)",
+          transition: "transform 0.3s ease-in-out",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "20px 40px",
+          padding: "15px 20px",
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           zIndex: 20,
           width: "100%",
-          backgroundColor: isScrolled ? "#000" : "transparent",
-          boxShadow: isScrolled ? "0 4px 12px rgba(0, 0, 0, 0.3)" : "none",
-          transition: "background-color 0.3s ease, box-shadow 0.3s ease",
+          backgroundImage:
+            "linear-gradient(135deg, rgba(17, 17, 17, 0.95) 0%, rgba(0, 51, 102, 0.9) 35%, rgba(0, 102, 255, 0.85) 70%, rgba(0, 204, 136, 0.8) 100%)",
+          backdropFilter: "blur(4px)",
+          boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
         }}
       >
         <Link to="/">
           <img
-            src="wp-content/themes/synctriotech/react-src/public/assets/synctrio-tech-left.svg"
+            src={
+              logoUrl ||
+              "wp-content/themes/synctriotech/react-src/public/assets/synctrio-tech-left.svg"
+            }
             alt="SyncTrio Tech"
             style={{
               height: "50px",
@@ -71,7 +98,7 @@ const Header: React.FC = () => {
           right: menuOpen ? 0 : "-100%",
           height: "100%",
           width: "280px",
-          backgroundColor: "#000",
+          backgroundColor: "#004d40",
           color: "#fff",
           padding: "30px 20px",
           transition: "right 0.3s ease-in-out",
@@ -120,14 +147,10 @@ const Header: React.FC = () => {
           ))}
         </nav>
 
-        {/* Footer Section in Menu */}
         <div style={{ marginTop: "40px" }}>
-          {/* CTA */}
-
           <Link
-            className="hero-button"
             to="/contact"
-            onClick={toggleMenu}
+            onClick={() => setMenuOpen(false)}
             style={{
               display: "block",
               textAlign: "center",
@@ -141,7 +164,6 @@ const Header: React.FC = () => {
           >
             Let's Talk
           </Link>
-          {/* Socials */}
           <div
             style={{ display: "flex", justifyContent: "center", gap: "20px" }}
           >
@@ -171,4 +193,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default HeaderDefault;
