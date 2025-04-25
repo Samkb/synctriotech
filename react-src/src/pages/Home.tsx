@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   BusinessCenter,
@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import SparkleCanvas from "../components/SparkleCanvas";
 import Header from "../components/HeaderHome"; // Import your Header component here
 import Footer from "../components/Footer"; // Import your Header component here
+import PortfolioSection from "../components/PortfolioSection"; // Import your Header component here
 import MouseIcon from "@mui/icons-material/Mouse";
 import BuildIcon from "@mui/icons-material/Build";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
@@ -35,6 +36,8 @@ import Lottie from "lottie-react";
 import handshakeAnimation from "../assets/lotties/handshake.json";
 import progressAnimation from "../assets/lotties/progress.json";
 import celebrationAnimation from "../assets/lotties/celebration.json";
+import { PlayCircleFilled } from "@mui/icons-material";
+import Modal from "react-bootstrap/Modal";
 
 const Home: React.FC = () => {
   const timelineRef = useRef(null);
@@ -223,7 +226,6 @@ const Home: React.FC = () => {
             </motion.div>
           </a>
         </section>
-
         {/* Core Pillars Section */}
         <section
           id="core-pillars"
@@ -759,341 +761,7 @@ const Home: React.FC = () => {
           </div>
         </section>
         {/* Our Works Section */}
-        <section
-          id="portfolio"
-          className="portfolio-section py-5"
-          style={{
-            background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)",
-            color: "#fff",
-          }}
-        >
-          <div className="container">
-            <motion.h2
-              className="fw-bold text-center mb-4 display-5"
-              initial={{ opacity: 0, y: -30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              Our Work
-            </motion.h2>
-            <p className="text-center mb-5 text-light fs-5">
-              Explore some of our featured projects that demonstrate innovation,
-              reliability, and growth-focused results.
-            </p>
-
-            <div className="row g-4">
-              {[
-                {
-                  image:
-                    "/wp-content/themes/synctriotech/react-src/public/assets/client1.png",
-                  title: "UK SANSAR",
-                  subtitle: "Design, Development",
-                },
-                {
-                  image:
-                    "/wp-content/themes/synctriotech/react-src/public/assets/client2.png",
-                  title: "UK SANSAR ESTATE AGENCY",
-                  subtitle: "Design, Develop, API Integration",
-                },
-                {
-                  image:
-                    "/wp-content/themes/synctriotech/react-src/public/assets/client3.png",
-                  title: "DOKO HOMES",
-                  subtitle: "Design, Development",
-                },
-              ].map(({ image, title, subtitle }, index) => (
-                <motion.div
-                  key={index}
-                  className="col-12 col-sm-6 col-lg-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                >
-                  <div className="project-card position-relative overflow-hidden rounded-4 shadow">
-                    <div className="image-scroll-container">
-                      <img
-                        src={image}
-                        alt={title}
-                        className="scroll-img img-fluid"
-                      />
-                    </div>
-                    <div className="overlay d-flex flex-column justify-content-end text-start p-3">
-                      <h5 className="fw-bold text-white mb-1">{title}</h5>
-                      <p className="text-light mb-0">{subtitle}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="text-center mt-5">
-              <Link
-                to="/portfolio"
-                className="btn btn-outline-light btn-lg rounded-pill px-5"
-              >
-                See Our Work
-              </Link>
-            </div>
-          </div>
-
-          <style>{`
-    .project-card {
-      height: 100%;
-      border: 1px solid #2f4f4f;
-      transition: transform 0.4s ease, box-shadow 0.3s ease;
-    }
-
-    .project-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
-    }
-
-    .project-card:hover .overlay {
-  background: transparent;
-  opacity: 0;
-  transition: opacity 0.4s ease, background 0.4s ease;
-}
-    .image-scroll-container {
-      height: 300px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .scroll-img {
-      width: 100%;
-      transition: transform 6s ease-in-out;
-    }
-
-    .project-card:hover .scroll-img {
-      transform: translateY(-80%);
-    }
-
- 
-.overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.6);
-  transition: background 0.4s ease, opacity 0.4s ease;
-}
-    .overlay h5,
-    .overlay p {
-      margin: 0;
-      opacity: 1;
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-  .project-card:hover .overlay h5,
-  .project-card:hover .overlay p {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  `}</style>
-        </section>
-        {/* Testimonial Section */}
-        {/* <section
-          id="testimonials"
-          className="testimonials-section py-5"
-          style={{
-            background: "linear-gradient(to right, #1c1c1c, #2b2b2b)",
-            color: "#fff",
-            position: "relative",
-          }}
-        >
-          <div className="container position-relative">
-            <motion.h2
-              className="fw-bold text-center mb-4 display-5 d-flex align-items-center justify-content-center gap-3"
-              initial={{ opacity: 0, y: -30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <i className="bi bi-chat-quote-fill text-cyan"></i>
-              What Our Clients Say
-            </motion.h2>
-            <p className="text-center text-muted mb-5">
-              Voices from visionaries — built, launched, and loved 🚀
-            </p>
-
-            <div className="timeline-wrapper">
-              <div className="timeline-line" ref={timelineRef}></div>
-
-              {[
-                {
-                  quote:
-                    "SyncTrio Tech transformed our business with seamless integration and a user-friendly platform!",
-                  name: "Aarav Sharma",
-                  logo: "/assets/clients/client1-logo.png",
-                  rating: 5,
-                  date: "2024-12-15 10:30 AM",
-                },
-                {
-                  quote:
-                    "Their team delivered beyond expectations. We're seeing real results!",
-                  name: "Priya Desai",
-                  logo: "/assets/clients/client2-logo.png",
-                  rating: 4,
-                  date: "2025-01-10 03:45 PM",
-                },
-                {
-                  quote:
-                    "We loved the collaboration and support throughout our SaaS build. Definitely recommended.",
-                  name: "Rajan Thapa",
-                  logo: "/assets/clients/client3-logo.png",
-                  rating: 5,
-                  date: "2025-02-25 12:15 PM",
-                },
-              ].map((testimonial, index) => (
-                <motion.div
-                  key={index}
-                  className={`timeline-item ${
-                    index % 2 === 0 ? "left" : "right"
-                  }`}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.3 }}
-                >
-                  <div className="node-dot"></div>
-
-                  <div className="testimonial-card p-4 text-center">
-                    <img
-                      src={
-                        testimonial.logo ||
-                        `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                          testimonial.name
-                        )}&background=00ffff&color=ffffff&rounded=true&size=80`
-                      }
-                      onError={(e) => {
-                        e.currentTarget.onerror = null;
-                        e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                          testimonial.name
-                        )}&background=00ffff&color=ffffff&rounded=true&size=80`;
-                      }}
-                      alt={testimonial.name}
-                      className="rounded-circle mb-3"
-                      width="70"
-                      height="70"
-                    />
-
-                    <p className="fs-6 fst-italic text-light mb-3 position-relative">
-                      <i className="bi bi-quote fs-4 text-cyan me-1"></i>
-                      {testimonial.quote}
-                    </p>
-                    <div className="mb-2">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <i key={i} className="bi bi-star-fill text-warning"></i>
-                      ))}
-                    </div>
-                    <h6 className="fw-bold text-white mb-0">
-                      <i className="bi bi-person-circle me-2 text-info"></i>
-                      {testimonial.name}
-                    </h6>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <style>{`
-          .text-cyan {
-            color: #00ffff;
-          }
-
-          .timeline-wrapper {
-            position: relative;
-            padding: 2rem 0;
-          }
-
-          .timeline-line {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 4px;
-            background: #00ffff;
-            transform-origin: top;
-            transform: scaleY(0);
-            transition: transform 0.3s ease-out;
-            z-index: 1;
-          }
-
-          .timeline-item {
-            position: relative;
-            width: 100%;
-            max-width: 46%;
-            margin-bottom: 60px;
-            z-index: 2;
-          }
-
-          .timeline-item.left {
-            left: 0;
-            text-align: right;
-          }
-
-          .timeline-item.right {
-            left: 54%;
-            text-align: left;
-          }
-
-          .node-dot {
-            width: 20px;
-            height: 20px;
-            background: #00ffff;
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: -10px;
-            transform: translateX(-50%);
-            animation: pulseDot 2s infinite;
-            z-index: 3;
-          }
-
-          .testimonial-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1.5rem;
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.05);
-            backdrop-filter: blur(8px);
-            transition: transform 0.3s ease;
-          }
-
-          .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.1);
-          }
-
-          @keyframes pulseDot {
-            0% {
-              box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.5);
-            }
-            70% {
-              box-shadow: 0 0 0 10px rgba(0, 255, 255, 0);
-            }
-            100% {
-              box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
-            }
-          }
-
-          @media (max-width: 768px) {
-            .timeline-line {
-              left: 20px;
-            }
-
-            .timeline-item {
-              max-width: 100%;
-              left: 0 !important;
-              padding-left: 40px;
-              text-align: left;
-            }
-
-            .node-dot {
-              left: 20px;
-            }
-          }
-        `}</style>
-        </section> */}
-
+        <PortfolioSection />
         <Footer />
         {/* Floating Navigation */}
         <FloatingNav />

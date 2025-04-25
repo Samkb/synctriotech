@@ -6,8 +6,8 @@ import InfoIcon from "@mui/icons-material/Info";
 import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices";
 import VerifiedIcon from "@mui/icons-material/Verified"; // Why Choose Us
 import WorkIcon from "@mui/icons-material/Work"; // Portfolio
-import StarIcon from "@mui/icons-material/Star"; // Testimonials
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"; // Navigation icon
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"; // Top Arrow icon
 import CloseIcon from "@mui/icons-material/Close";
 
 const navItems = [
@@ -37,7 +37,7 @@ const FloatingNav: React.FC = () => {
   return (
     <div style={styles.wrapper}>
       <div style={styles.fab} onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <CloseIcon /> : <ArrowForwardIcon />} {/* Changed icon */}
+        {isOpen ? <CloseIcon /> : <ArrowUpwardIcon />}
       </div>
 
       <AnimatePresence>
@@ -75,9 +75,8 @@ const FloatingNav: React.FC = () => {
 const styles: { [key: string]: React.CSSProperties } = {
   wrapper: {
     position: "fixed",
-    top: "50%",
+    bottom: "20px", // Positioned at the bottom-right of the page
     right: "20px",
-    transform: "translateY(-50%)",
     zIndex: 5000,
   },
   fab: {
@@ -96,8 +95,8 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   iconList: {
     position: "absolute",
-    right: "60px",
-    top: "0",
+    right: "0px", // Aligned right next to the floating button
+    bottom: "70px", // Positioned slightly above the floating button
     background: "#1a1a1a",
     padding: "12px",
     borderRadius: "12px",
