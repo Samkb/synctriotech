@@ -191,7 +191,7 @@ const Home: React.FC = () => {
             </div>
 
             <div className="text-center mt-4">
-              <Link to="/contact" className="hero-button fw-semibold">
+              <Link to="/about" className="hero-button fw-semibold">
                 Get Started Today
               </Link>
             </div>
@@ -231,8 +231,8 @@ const Home: React.FC = () => {
           id="core-pillars"
           className="core-pillars-section-clean text-center"
           style={{
-            background: "linear-gradient(135deg, #004e92, #000428)",
-            padding: "4rem 0",
+            background: "linear-gradient(135deg, rgba(29 29 90), #000428)",
+            padding: "10rem 0",
             color: "#fff",
           }}
         >
@@ -311,8 +311,8 @@ const Home: React.FC = () => {
         <section
           id="about"
           style={{
-            padding: "4rem 0",
-            background: "linear-gradient(135deg, #0c3c29, #0f5132)",
+            padding: "8rem 0",
+            background: "linear-gradient(135deg,rgba(2 14 9),rgba(24 55 41))",
             color: "#e6fff3",
             position: "relative",
             overflow: "hidden",
@@ -628,7 +628,7 @@ const Home: React.FC = () => {
           className="why-choose-us-section text-center"
           style={{
             background: "linear-gradient(135deg, #000814, #001d3d)",
-            padding: "4rem 0",
+            padding: "3rem 0",
             color: "#fff",
           }}
         >
@@ -664,7 +664,7 @@ const Home: React.FC = () => {
               {[
                 {
                   icon: <BuildIcon sx={{ color: "#00e676", fontSize: 28 }} />,
-                  text: "Tailored Solutions – Custom-built for startups and businesses to fit unique needs.",
+                  text: "Tailored Solutions for startups and businesses to fit unique needs.",
                 },
                 {
                   icon: (
@@ -701,7 +701,7 @@ const Home: React.FC = () => {
               ].map(({ icon, text }, i) => (
                 <motion.div
                   key={i}
-                  className="col-12 col-md-6 mb-4 d-flex align-items-start justify-content-center"
+                  className="col-12 col-md-4 mb-4 d-flex align-items-start justify-content-center"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}

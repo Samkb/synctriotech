@@ -37,11 +37,21 @@ const Footer: React.FC = () => {
             <ul className="list-unstyled fs-5">
               <li className="mb-3 d-flex align-items-center gap-3">
                 <EmailIcon className="text-cyan" />
-                <span>hello@synctrio.com</span>
+                <a
+                  href="mailto:hello@synctrio.com"
+                  className="text-decoration-none text-white"
+                >
+                  hello@synctrio.com
+                </a>
               </li>
               <li className="mb-3 d-flex align-items-center gap-3">
                 <PhoneIcon className="text-cyan" />
-                <span>+977-9849121600</span>
+                <a
+                  href="tel:+9779849121600"
+                  className="text-decoration-none text-white"
+                >
+                  +977-9849121600
+                </a>
               </li>
             </ul>
 

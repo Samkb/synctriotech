@@ -9,12 +9,13 @@ import {
   EmojiEmotions as CheersIcon,
   TrendingUp as ProgressIcon,
 } from "@mui/icons-material";
+import { motion } from "framer-motion";
 
 import Lottie from "lottie-react";
 import handshakeAnim from "../assets/lotties/handshake.json";
 import progressAnim from "../assets/lotties/progress.json";
 import celebrationAnim from "../assets/lotties/celebration.json";
-
+import CtaSection from "../components/CtaSection";
 const About: React.FC = () => {
   return (
     <div>
@@ -22,7 +23,8 @@ const About: React.FC = () => {
       <section
         className="text-white py-5"
         style={{
-          background: "linear-gradient(135deg, #000000, #0047AB, #00FF88)",
+          background:
+            "linear-gradient(135deg, rgb(0 0 0), rgb(31 33 37), rgb(46 109 80))",
           paddingTop: "80px",
           paddingBottom: "80px",
         }}
@@ -37,25 +39,46 @@ const About: React.FC = () => {
             We believe in partnership, growth, and celebrating milestones
             together.
           </p>
-          <div className="d-flex justify-content-center align-items-center gap-4 my-4 flex-wrap">
-            <div style={{ width: 120 }}>
-              <Lottie animationData={handshakeAnim} loop={true} />
+        </div>
+      </section>
+      {/* Animations Section */}
+      <section
+        className="py-5"
+        style={{
+          backgroundColor: "#f8f9fa", // Light background for contrast
+          paddingTop: "60px",
+          paddingBottom: "60px",
+        }}
+      >
+        <div className="container text-center">
+          <div className="row justify-content-center g-5">
+            <div className="col-md-4">
+              <div style={{ width: 300, height: 300, margin: "0 auto" }}>
+                <Lottie animationData={handshakeAnim} loop={true} />
+              </div>
+              <h5 className="mt-3">Partnership</h5>
             </div>
-            <div style={{ width: 120 }}>
-              <Lottie animationData={progressAnim} loop={true} />
+            <div className="col-md-4">
+              <div style={{ width: 300, height: 300, margin: "0 auto" }}>
+                <Lottie animationData={progressAnim} loop={true} />
+              </div>
+              <h5 className="mt-3">Growth</h5>
             </div>
-            <div style={{ width: 120 }}>
-              <Lottie animationData={celebrationAnim} loop={true} />
+            <div className="col-md-4">
+              <div style={{ width: 300, height: 300, margin: "0 auto" }}>
+                <Lottie animationData={celebrationAnim} loop={true} />
+              </div>
+              <h5 className="mt-3">Celebration</h5>
             </div>
           </div>
         </div>
       </section>
-
       {/* Core Section */}
       <section
         className="py-5"
         style={{
-          background: "linear-gradient(135deg, #1c1c1c, #1565c0, #00cc99)",
+          background:
+            "linear-gradient(135deg, rgb(28, 28, 28), rgb(9 15 21), rgb(25 180 142))",
           color: "white",
         }}
       >
@@ -132,34 +155,7 @@ const About: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section
-        className="py-5 text-center text-white"
-        style={{
-          background: "linear-gradient(135deg, #101820, #1e3c72, #29a3a3)",
-        }}
-      >
-        <div className="container">
-          <h2 className="fw-bold mb-4">Not Sure Where to Start?</h2>
-          <p className="lead mb-3">
-            Are you planning to create a website but don’t know where to begin?
-          </p>
-          <p className="lead mb-4">
-            Thinking, “I need to digitalize my business but I don’t know how or
-            where to start”?
-          </p>
-          <a
-            href="/contact"
-            className="btn btn-lg"
-            style={{
-              backgroundColor: "#00FF88",
-              color: "#000",
-              fontWeight: "bold",
-            }}
-          >
-            Let Us Guide You
-          </a>
-        </div>
-      </section>
+      <CtaSection />
     </div>
   );
 };

@@ -5,7 +5,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import SvgIcon from "@mui/material/SvgIcon";
 
 const SyncTrioRestUrl = window.SyncTrioRest || {};
-console.log(SyncTrioRestUrl, "rest url");
+// console.log(SyncTrioRestUrl, "rest url");
 
 // Custom Viber Icon
 
@@ -128,8 +128,7 @@ Till then, chill and let the tech vibes flow ✨`);
               style={{
                 fontSize: "3.2rem",
                 WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundImage: "linear-gradient(90deg, #00e0ff, #40ffba)",
+
                 textShadow: "0 0 10px rgba(0, 224, 255, 0.3)",
               }}
             >

@@ -13,6 +13,7 @@ import {
   Code,
   Cloud,
 } from "@mui/icons-material";
+import CtaSection from "../components/CtaSection";
 
 const Services: React.FC = () => {
   return (
@@ -48,69 +49,107 @@ const Services: React.FC = () => {
         </div>
       </section>
 
-      {/* 💼 Service Highlights */}
+      {/* 💼 Service Highlights - Deluxe Gradient Circle Version */}
       <section
-        className="py-5 text-white"
+        className="py-5"
         style={{
-          background: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+          backgroundColor: "#ffffff",
+          color: "#212529",
+          paddingTop: "80px",
+          paddingBottom: "80px",
         }}
       >
         <div className="container">
           <div className="text-center mb-5">
-            <h2 className="fw-bold fade-in-animation">What We Offer</h2>
-            <p className="lead fade-in-animation">
+            <h2
+              className="fw-bold fade-in-animation"
+              style={{ fontSize: "2.8rem" }}
+            >
+              What We Offer
+            </h2>
+            <p
+              className="lead fade-in-animation"
+              style={{ color: "#555", fontSize: "1.25rem" }}
+            >
               Custom services tailored to your business goals.
             </p>
           </div>
+
           <div className="row g-4">
             {[
               {
                 title: "Website Design",
                 icon: <DesignServices fontSize="large" />,
-                color: "#00e676",
+                gradient: "linear-gradient(135deg, #00e676, #1de9b6)",
               },
               {
                 title: "Website Development",
                 icon: <Lan fontSize="large" />,
-                color: "#40c4ff",
+                gradient: "linear-gradient(135deg, #40c4ff, #00b0ff)",
               },
               {
                 title: "E-commerce Solutions",
                 icon: <ShoppingCart fontSize="large" />,
-                color: "#ffc107",
+                gradient: "linear-gradient(135deg, #ffc107, #ff9800)",
               },
               {
                 title: "API Integration",
                 icon: <IntegrationInstructions fontSize="large" />,
-                color: "#ff4081",
+                gradient: "linear-gradient(135deg, #ff4081, #f50057)",
               },
               {
                 title: "SEO Services",
                 icon: <TrendingUp fontSize="large" />,
-                color: "#9575cd",
+                gradient: "linear-gradient(135deg, #9575cd, #7e57c2)",
               },
               {
                 title: "Ongoing Maintenance",
                 icon: <Build fontSize="large" />,
-                color: "#ff8a65",
+                gradient: "linear-gradient(135deg, #ff8a65, #ff7043)",
               },
-            ].map(({ title, icon, color }, index) => (
+            ].map(({ title, icon, gradient }, index) => (
               <div key={index} className="col-md-6 col-lg-4 fade-in-animation">
                 <div
-                  className="p-4 h-100 shadow text-center"
+                  className="p-4 h-100 shadow-sm text-center"
                   style={{
-                    backgroundColor: "rgba(255, 255, 255, 0.05)",
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    borderRadius: "15px",
-                    transition: "all 0.3s ease-in-out",
+                    backgroundColor: "#f9f9f9",
+                    borderRadius: "16px",
+                    border: "1px solid #e0e0e0",
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-8px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 8px 20px rgba(0,0,0,0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 10px rgba(0,0,0,0.05)";
                   }}
                 >
-                  <div className="mb-3" style={{ color }}>
+                  {/* Deluxe Gradient Circle Icon */}
+                  <div
+                    className="d-flex align-items-center justify-content-center mx-auto mb-3"
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      borderRadius: "50%",
+                      background: gradient,
+                      color: "#ffffff",
+                      fontSize: "2.2rem",
+                    }}
+                  >
                     {icon}
                   </div>
-                  <h5 className="fw-bold">{title}</h5>
-                  <p className="small">
+
+                  <h5 className="fw-bold mb-2" style={{ fontSize: "1.5rem" }}>
+                    {title}
+                  </h5>
+                  <p
+                    className="small"
+                    style={{ color: "#666", fontSize: "1rem" }}
+                  >
                     We deliver secure, scalable, and user-friendly{" "}
                     {title.toLowerCase()} solutions.
                   </p>
@@ -153,33 +192,7 @@ const Services: React.FC = () => {
       </section>
 
       {/* 🚀 CTA */}
-      <section
-        className="py-5 text-center text-white"
-        style={{
-          background: "linear-gradient(135deg, #000000, #004e92, #000428)",
-        }}
-      >
-        <div className="container">
-          <h2 className="fw-bold mb-3 fade-in-animation">
-            Ready to Grow Your Business?
-          </h2>
-          <p className="lead mb-4 fade-in-animation">
-            Let’s build something extraordinary together.
-          </p>
-          <Link
-            to="/start-project"
-            className="btn btn-lg fw-bold fade-in-animation"
-            style={{
-              backgroundColor: "#00FF88",
-              color: "#000",
-              borderRadius: "30px",
-              padding: "0.75rem 2rem",
-            }}
-          >
-            Start a Project
-          </Link>
-        </div>
-      </section>
+      <CtaSection />
 
       {/* Floating Icon Styles */}
       <style>{`
