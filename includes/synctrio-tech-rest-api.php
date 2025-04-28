@@ -29,9 +29,10 @@ function synctrio_send_contact_email($request)
   <div style='font-family: Arial, sans-serif; background-color: #f7f9fb; padding: 20px; color: #333;'>
     <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.05);'>
 
-      <div style='text-align: center; margin-bottom: 20px;'>
-        <img src='{$logo_url}' alt='SyncTrio Tech Logo' style='max-width: 180px; height: auto;' />
-      </div>
+      <div style='text-align: center; margin-bottom: 20px; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;'>
+  <span style='color: #000000;'>SYNC</span><span style='color: #007BFF;'>TRIO</span> <span style='color: #28a745;'>Tech</span>
+</div>
+
 
       <h2 style='color: #0c7c59; border-bottom: 2px solid #40ffba; padding-bottom: 10px;'>📩 New Lead from SyncTrio Tech</h2>
 
