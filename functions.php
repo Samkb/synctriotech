@@ -95,3 +95,42 @@ add_action('rest_api_init', function () {
         'permission_callback' => '__return_true',
     ));
 });
+
+
+function change_wp_mail_from($original_email_address)
+{
+    return 'hello@synctrio.com'; // Replace with your desired email address
+}
+
+function change_wp_mail_from_name($original_email_from)
+{
+    return 'SyncTrio Tech'; // Replace with your desired name
+}
+
+add_filter('wp_mail_from', 'change_wp_mail_from');
+add_filter('wp_mail_from_name', 'change_wp_mail_from_name');
+
+
+function synctrio_add_meta_tags()
+{
+    // Set the same title, description, and keywords for all pages
+    $title = 'SyncTrio Tech | Business, Technology & Growth';
+    $description = 'Grow your business with top IT solutions. Let\'s build together.';
+    $keywords = 'business, tech, growth, Website Design, Website Development, E-commerce Solutions, technical service';
+?>
+    <meta property="og:title" content="<?php echo esc_attr($title); ?>" />
+    <meta property="og:description" content="<?php echo esc_attr($description); ?>" />
+    <meta property="og:image" content="https://synctrio.com/wp-content/uploads/2025/04/logo-full.svg" />
+    <meta property="og:url" content="<?php echo esc_url(get_permalink()); ?>" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="<?php echo esc_attr($title); ?>" />
+    <meta name="twitter:description" content="<?php echo esc_attr($description); ?>" />
+    <meta name="twitter:image" content="https://synctrio.com/wp-content/uploads/2025/04/logo-full.svg" />
+
+    <!-- Adding Keywords Meta Tag -->
+    <meta name="keywords" content="<?php echo esc_attr($keywords); ?>" />
+<?php
+}
+add_action('wp_head', 'synctrio_add_meta_tags');
