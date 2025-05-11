@@ -160,7 +160,7 @@ Till then, chill and let the tech vibes flow ✨`);
                   hello@synctrio.com
                 </p>
 
-                <p className="d-flex align-items-center gap-2 mb-3">
+                {/* <p className="d-flex align-items-center gap-2 mb-3">
                   <Phone className="text-info" />
                   <a
                     href="tel:+9779849121600"
@@ -168,11 +168,11 @@ Till then, chill and let the tech vibes flow ✨`);
                   >
                     +977-9849121600
                   </a>
-                </p>
+                </p> */}
 
                 <p className="d-flex align-items-center gap-2 mb-3">
                   <a
-                    href="https://wa.me/9779849121600"
+                    href="https://wa.me/9779808119388"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="d-flex align-items-center gap-2 text-decoration-none text-light"
@@ -184,7 +184,7 @@ Till then, chill and let the tech vibes flow ✨`);
 
                 <p className="d-flex align-items-center gap-2 mb-3">
                   <a
-                    href="viber://add?number=9779849121600"
+                    href="viber://add?number=9779808119388"
                     className="d-flex align-items-center gap-2 text-decoration-none text-light"
                     onClick={(e) => {
                       // Optional: Check for browser/device support
@@ -306,7 +306,6 @@ Till then, chill and let the tech vibes flow ✨`);
                     disabled={loading}
                   >
                     {loading ? "Sending..." : "Send Message"}
-                    <Send />
                   </button>
                 </form>
                 {responseMsg && (

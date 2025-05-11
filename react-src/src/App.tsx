@@ -13,6 +13,7 @@ import Services from "./pages/Services";
 import Footer from "./components/Footer";
 import HeaderHome from "./components/HeaderHome";
 import HeaderDefault from "./components/HeaderDefault";
+import PortfolioSingle from "./components/PortfolioSingle";
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -29,6 +30,7 @@ const Layout: React.FC = () => {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/portfolio/:slug" element={<PortfolioSingle />} />
       </Routes>
 
       {/* Render Footer only if not on Home page */}

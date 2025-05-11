@@ -1,91 +1,65 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Close } from "@mui/icons-material";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material"; // Add this import
 
 const PortfolioSection = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [modalImage, setModalImage] = useState("");
-  const [modalData, setModalData] = useState({ title: "", subtitle: "" });
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const scrollRef = useRef(null);
-  const imageRef = useRef(null);
-  const startYRef = useRef(null);
-
-  const projects = [
-    {
-      image:
-        "/wp-content/themes/synctriotech/react-src/public/assets/client1.png",
-      title: "UK SANSAR",
-      subtitle: "Design, Development",
-    },
-    {
-      image:
-        "/wp-content/themes/synctriotech/react-src/public/assets/client2.png",
-      title: "UK SANSAR ESTATE AGENCY",
-      subtitle: "Design, Develop, Properties API Integration",
-    },
-    {
-      image:
-        "/wp-content/themes/synctriotech/react-src/public/assets/client3.png",
-      title: "DOKO HOMES",
-      subtitle: "Design, Development",
-    },
-  ];
-
-  const openModal = ({ image, title, subtitle }) => {
-    setModalImage(image);
-    setModalData({ title, subtitle });
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    setScrollProgress(0);
-  };
+  const [projects, setProjects] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [itemsPerSlide, setItemsPerSlide] = useState(3);
 
   useEffect(() => {
-    if (showModal && imageRef.current) {
-      imageRef.current.style.animation = "scrollUp 12s linear forwards";
-    }
-  }, [showModal]);
+    const apiUrl = `${window.SyncTrioRest.root}wp/v2/synctrio-work?_embed`;
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        const formattedProjects = data.map((post) => ({
+          title: post.title.rendered,
+          subtitle:
+            post._embedded?.["wp:term"]
+              ?.flat()
+              .map((term) => term.name)
+              .join(", ") || "",
+          image: post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "",
+          website: post.meta?.website_url || "",
+          slug: post.slug,
+        }));
+        setProjects(formattedProjects);
+      })
+      .catch((err) => console.error("Failed to fetch API posts", err));
+  }, []);
 
+  // Set itemsPerSlide based on window width
   useEffect(() => {
-    const scrollEl = scrollRef.current;
-
-    const handleScroll = () => {
-      if (imageRef.current) {
-        imageRef.current.style.animation = "none";
-        imageRef.current.style.transform = "translateY(0%)";
-      }
-      const scrollTop = scrollEl.scrollTop;
-      const scrollHeight = scrollEl.scrollHeight - scrollEl.clientHeight;
-      const scrolled = (scrollTop / scrollHeight) * 100;
-      setScrollProgress(scrolled);
-      if (scrolled >= 99) setTimeout(closeModal, 1000);
+    const updateItemsPerSlide = () => {
+      const width = window.innerWidth;
+      if (width < 576) setItemsPerSlide(1);
+      else if (width < 992) setItemsPerSlide(2);
+      else setItemsPerSlide(3);
     };
 
-    const handleTouchStart = (e) => {
-      startYRef.current = e.touches[0].clientY;
-    };
+    updateItemsPerSlide();
+    window.addEventListener("resize", updateItemsPerSlide);
+    return () => window.removeEventListener("resize", updateItemsPerSlide);
+  }, []);
 
-    const handleTouchEnd = (e) => {
-      const endY = e.changedTouches[0].clientY;
-      if (Math.abs(endY - startYRef.current) > 100) closeModal();
-    };
-
-    if (scrollEl) {
-      scrollEl.addEventListener("scroll", handleScroll);
-      scrollEl.addEventListener("touchstart", handleTouchStart);
-      scrollEl.addEventListener("touchend", handleTouchEnd);
+  // Chunk array into slide groups
+  const chunkProjects = () => {
+    const chunks = [];
+    for (let i = 0; i < projects.length; i += itemsPerSlide) {
+      chunks.push(projects.slice(i, i + itemsPerSlide));
     }
+    return chunks;
+  };
 
-    return () => {
-      if (scrollEl) {
-        scrollEl.removeEventListener("scroll", handleScroll);
-        scrollEl.removeEventListener("touchstart", handleTouchStart);
-        scrollEl.removeEventListener("touchend", handleTouchEnd);
-      }
-    };
-  }, [showModal]);
+  const slides = chunkProjects();
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1 < slides.length ? prev + 1 : 0));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 < 0 ? slides.length - 1 : prev - 1));
+  };
 
   return (
     <section
@@ -96,73 +70,67 @@ const PortfolioSection = () => {
         color: "#fff",
       }}
     >
-      <div className="container">
-        <h2 className="fw-bold text-center mb-4 display-5">Our Work</h2>
-        <p className="text-center mb-5 text-light fs-5">
+      <div className="container text-center">
+        <h2 className="fw-bold mb-4 display-5">Our Work</h2>
+        <p className="mb-5 text-light fs-5">
           Explore some of our featured projects that demonstrate innovation,
           reliability, and growth-focused results.
         </p>
 
-        <div className="row g-4">
-          {projects.map((project, index) => (
-            <div key={index} className="col-12 col-sm-6 col-lg-4">
-              <div className="project-card position-relative overflow-hidden rounded-4 shadow">
-                <div
-                  className="image-scroll-container"
-                  onClick={() => openModal(project)}
-                >
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="scroll-img img-fluid"
-                  />
-                  <div className="centered-overlay">
-                    <span>Click to View</span>
+        {slides.length > 0 && (
+          <>
+            <div className="row g-4 justify-content-center">
+              {slides[currentSlide].map((project, index) => (
+                <div key={index} className="col-12 col-sm-6 col-lg-4">
+                  <div className="project-card position-relative overflow-hidden rounded-4 shadow h-100">
+                    <a
+                      href={project.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-decoration-none"
+                    >
+                      {/* <Link to={`/portfolio/${project.slug}`} className="text-decoration-none"></Link> */}
+                      <div className="image-scroll-container">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="scroll-img img-fluid"
+                        />
+                        <div className="centered-overlay">
+                          <span>Click to View</span>
+                        </div>
+                      </div>
+                      <div className="overlay d-flex flex-column justify-content-end text-start p-3">
+                        <h5 className="fw-bold text-white mb-1">
+                          {project.title}
+                        </h5>
+                        <p className="text-light mb-0">{project.subtitle}</p>
+                      </div>
+                    </a>
                   </div>
                 </div>
-
-                <div className="overlay d-flex flex-column justify-content-end text-start p-3">
-                  <h5 className="fw-bold text-white mb-1">{project.title}</h5>
-                  <p className="text-light mb-0">{project.subtitle}</p>
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {showModal && (
-          <div className="custom-modal" onClick={closeModal}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <span className="close-btn" onClick={closeModal}>
-                <Close style={{ fontSize: "2rem", color: "#fff" }} />
-              </span>
-
-              <div className="scroll-wrapper" ref={scrollRef}>
-                <img
-                  ref={imageRef}
-                  src={modalImage}
-                  alt="scroll-preview"
-                  className="modal-scroll-img"
-                />
-              </div>
-
-              {/* Fixed footer overlay */}
-              <div className="modal-footer-overlay">
-                <div className="modal-scroll-hint">
-                  Scroll or swipe to explore
-                </div>
-                <div className="scroll-progress-bar">
-                  <div
-                    className="progress-filled"
-                    style={{ width: `${scrollProgress}%` }}
-                  ></div>
-                </div>
-              </div>
+            <div className="slider-controls d-flex justify-content-center gap-3 mt-4">
+              <button
+                className="btn btn-gradient-hover d-flex align-items-center gap-2 px-4"
+                onClick={prevSlide}
+              >
+                <ChevronLeft />
+                Prev
+              </button>
+              <button
+                className="btn btn-gradient-hover d-flex align-items-center gap-2 px-4"
+                onClick={nextSlide}
+              >
+                Next
+                <ChevronRight />
+              </button>
             </div>
-          </div>
+          </>
         )}
       </div>
-
       <style>{`
     .project-card {
       height: 100%;
@@ -217,111 +185,35 @@ const PortfolioSection = () => {
     .image-scroll-container:hover .centered-overlay {
       opacity: 1;
     }
+.btn-gradient-hover {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 2px solid #fff;
+  color: #fff;
+  background: transparent;
+}
 
-    .custom-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100vw;
-      background-color: rgba(0, 0, 0, 0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
+.btn-gradient-hover:hover {
+  border-image: linear-gradient(45deg, #28a745, #00bcd4) 1;
+  color: #28a745;
+  background-color: rgba(255, 255, 255, 0.05);
+}
 
-    .modal-content {
-      position: relative;
-      max-width: 90%;
-      max-height: 90%;
-      overflow: hidden;
-      border-radius: 1rem;
-    }
+/* Icon slide effect */
+.btn-gradient-hover svg {
+  transition: transform 0.3s ease;
+}
 
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 2rem;
-      color: #fff;
-      cursor: pointer;
-      z-index: 10001;
-    }
+.btn-gradient-hover:hover svg:first-child {
+  transform: translateX(-4px); /* left arrow slides left */
+}
 
-    .scroll-wrapper {
-      overflow-y: auto;
-      max-height: 80vh;
-      position: relative;
-    }
+.btn-gradient-hover:hover svg:last-child {
+  transform: translateX(4px); /* right arrow slides right */
+}
 
-    .modal-scroll-img {
-      width: 100%;
-      animation: scrollUp 12s linear forwards;
-    }
-
-    .modal-overlay-content {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      color: #000;
-      padding: 1rem 1.5rem;
-      border-radius: 0.5rem;
-      max-width: 80%;
-      z-index: 9999;
-    }
-
-    .modal-scroll-hint {
-      position: absolute;
-      bottom: 10px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-      font-size: 0.85rem;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      z-index: 10001;
-      backdrop-filter: blur(4px);
-      animation: fadeInHint 2s ease-in-out;
-      pointer-events: none;
-    }
-
-    .modal-footer-overlay {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 0.5rem 1rem;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
-      z-index: 10001;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .scroll-progress-bar {
-      width: 100%;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .progress-filled {
-      height: 100%;
-      background: #00ffc6;
-      transition: width 0.3s ease;
-    }
-
-    @keyframes fadeInHint {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes scrollUp {
-      0% { transform: translateY(0%); }
-      100% { transform: translateY(-80%); }
-    }
+ 
 `}</style>
     </section>
   );

@@ -1,7 +1,6 @@
 import React from "react";
 import EmailIcon from "@mui/icons-material/Email";
-import PhoneIcon from "@mui/icons-material/Phone";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp"; // Changed
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const ContactSection: React.FC = () => {
@@ -20,9 +19,15 @@ const ContactSection: React.FC = () => {
             <p className="d-flex align-items-center gap-2 mb-2">
               <EmailIcon /> hello@synctrio.com
             </p>
-            <p className="d-flex align-items-center gap-2 mb-2">
-              <PhoneIcon /> +977-9849121600
-            </p>
+            <a
+              href="https://wa.me/9779808119388"
+              className="d-flex align-items-center gap-2 mb-2 text-white text-decoration-none"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <WhatsAppIcon style={{ color: "#25D366" }} />
+              Chat with us on WhatsApp
+            </a>
           </div>
 
           <h5>Connect With Us</h5>

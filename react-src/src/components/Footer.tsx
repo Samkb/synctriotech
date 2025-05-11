@@ -6,6 +6,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { Link } from "react-router-dom";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp"; // add this import at the top
 
 const Footer: React.FC = () => {
   return (
@@ -45,12 +46,14 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li className="mb-3 d-flex align-items-center gap-3">
-                <PhoneIcon className="text-cyan" />
+                <WhatsAppIcon className="text-success" />
                 <a
-                  href="tel:+9779849121600"
+                  href="https://wa.me/9808119388"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-decoration-none text-white"
                 >
-                  +977-9849121600
+                  WhatsApp Support / Contact Us
                 </a>
               </li>
             </ul>
